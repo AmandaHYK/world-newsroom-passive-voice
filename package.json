@@ -1,0 +1,9 @@
+{
+  "name": "world-newsroom-passive-voice-desk",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Classroom web application for secondary-school English passive voice news reporting",
+  "dependencies": {
+    "firebase-admin": "^12.1.1"
+  }
+}

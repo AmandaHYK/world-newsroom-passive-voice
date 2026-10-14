@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Newsroom: The Passive Voice Desk</title>
+  <style>
+    :root {
+      --navy: #0f172a;
+      --navy-light: #1e293b;
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-soft: #f0fdfa;
+      --coral: #e11d48;
+      --coral-soft: #fff1f2;
+      --gold: #d97706;
+      --gold-soft: #fffbeb;
+      --violet: #7c3aed;
+      --violet-soft: #f5f3ff;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(15, 23, 42, 0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--teal-dark);
+      text-decoration: underline;
+    }
+
+    a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--violet);
+      outline-offset: 2px;
+    }
+
+    /* Header & Top Banners */
+    .top-banner {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 1rem 1.25rem;
+      border-bottom: 4px solid var(--teal);
+    }
+
+    .top-banner-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .fictional-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.14);
+      color: #fde68a;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      margin-top: 0.25rem;
+    }
+
+    .status-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+    .status-dot.connected { background: #10b981; }
+    .status-dot.connecting, .status-dot.reconnecting, .status-dot.saving { background: #f59e0b; }
+    .status-dot.failed { background: #ef4444; }
+
+    /* Sub-header Navigation & Notices */
+    .sub-header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .sub-header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .in-page-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav-chip {
+      text-decoration: none;
+      background: var(--bg);
+      color: var(--navy);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .nav-chip:hover {
+      background: var(--teal-soft);
+      border-color: var(--teal);
+    }
+
+    .privacy-notice {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      margin: 1.25rem auto;
+      padding: 0 1rem;
+    }
+
+    /* Instructions & Correspondent Bar */
+    .top-Bar-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (min-width: 900px) {
+      .top-Bar-grid {
+        grid-template-columns: 1.35fr 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+    }
+
+    .card-title {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--navy);
+    }
+
+    .steps-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.35rem 1.25rem;
+      font-size: 0.88rem;
+    }
+
+    .field-group {
+      margin-bottom: 1rem;
+    }
+
+    .field-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 0.35rem;
+      color: var(--navy);
+    }
+
+    .helper-text {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0.25rem 0 0.45rem 0;
+    }
+
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.65rem 0.8rem;
+      font-size: 0.96rem;
+      font-family: inherit;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    /* Two-column Workspace */
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 920px) {
+      .workspace-grid {
+        grid-template-columns: 1fr 1.15fr;
+        align-items: start;
+      }
+    }
+
+    /* City Badges */
+    .city-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .city-hk { background: #e11d48; }
+    .city-bj { background: #b91c1c; }
+    .city-tk { background: #7c3aed; }
+    .city-sl { background: #2563eb; }
+    .city-bk { background: #d97706; }
+    .city-ny { background: #0f766e; }
+    .city-ld { background: #1d4ed8; }
+    .city-sy { background: #047857; }
+    .city-pr { background: #9333ea; }
+    .city-rm { background: #c2410c; }
+
+    .briefing-header-box {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 0.85rem 0;
+    }
+
+    .briefing-header-box h3 {
+      margin: 0.4rem 0 0.25rem 0;
+      font-size: 1.15rem;
+    }
+
+    .briefing-location {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+
+    .briefing-bullets {
+      margin: 0.75rem 0 0 0;
+      padding-left: 1.25rem;
+    }
+
+    .briefing-bullets li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Word counter bar */
+    .word-count-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      margin-top: 0.45rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+    .wc-invalid {
+      background: var(--coral-soft);
+      color: var(--coral);
+      border: 1px solid #fecdd3;
+    }
+    .wc-valid {
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      border: 1px solid #99f6e4;
+    }
+
+    .byline-preview {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      padding: 0.65rem 1rem;
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      transition: background-color 0.15s, opacity 0.15s;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #ffffff;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--teal-dark);
+    }
+
+    .btn-secondary {
+      background: var(--navy);
+      color: #ffffff;
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: var(--navy-light);
+    }
+
+    .btn-violet {
+      background: var(--violet);
+      color: #ffffff;
+    }
+    .btn-violet:hover:not(:disabled) {
+      background: #6d28d9;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #ffffff;
+    }
+    .btn-gold:hover:not(:disabled) {
+      background: #b45309;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--navy);
+      border-color: var(--border);
+    }
+    .btn-outline:hover:not(:disabled) {
+      background: var(--bg);
+    }
+
+    /* Alert & Banner Messages */
+    .alert-box {
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 0.85rem;
+      display: none;
+    }
+    .alert-box.show { display: block; }
+    .alert-error { background: var(--coral-soft); color: var(--coral); border: 1px solid #fecdd3; }
+    .alert-success { background: var(--teal-soft); color: var(--teal-dark); border: 1px solid #99f6e4; }
+    .alert-info { background: var(--gold-soft); color: var(--gold); border: 1px solid #fde68a; }
+
+    /* AI Copyeditor Panel & Model Answer Panel */
+    .panel-section {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 2px dashed var(--border);
+    }
+
+    .ai-panel {
+      background: var(--violet-soft);
+      border: 1.5px solid #ddd6fe;
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .model-panel {
+      background: var(--gold-soft);
+      border: 1.5px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .advisory-banner {
+      background: #ffffff;
+      border-left: 4px solid var(--violet);
+      padding: 0.55rem 0.75rem;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .comment-card {
+      background: #ffffff;
+      border: 1px solid #ddd6fe;
+      border-radius: 8px;
+      padding: 0.75rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .comment-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.35rem;
+    }
+    .cat-grammar { background: var(--coral-soft); color: var(--coral); }
+    .cat-style { background: var(--teal-soft); color: var(--teal-dark); }
+    .cat-fact { background: var(--gold-soft); color: var(--gold); }
+    .cat-purpose { background: var(--violet-soft); color: var(--violet); }
+
+    .quote-extract {
+      font-family: Georgia, serif;
+      font-style: italic;
+      background: var(--bg);
+      padding: 0.25rem 0.5rem;
+      border-left: 3px solid var(--navy);
+      margin: 0.35rem 0;
+      font-size: 0.9rem;
+    }
+
+    /* Rolling News Feed */
+    .feed-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      background: var(--bg);
+      padding: 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .filter-group select, .filter-group input {
+      width: auto;
+      min-width: 160px;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.88rem;
+    }
+
+    .feed-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .feed-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .feed-card.owned-card {
+      border-left: 5px solid var(--teal);
+    }
+
+    .feed-card-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .version-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      background: var(--navy);
+      color: #ffffff;
+    }
+
+    .version-tag.revised {
+      background: var(--violet);
+    }
+
+    .feed-report-body {
+      font-size: 1.04rem;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--bg);
+      padding: 0.85rem;
+      border-radius: 8px;
+      margin: 0.6rem 0;
+    }
+
+    .feed-meta-box {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    details.ai-expand {
+      margin-top: 0.75rem;
+      background: var(--violet-soft);
+      border: 1px solid #ddd6fe;
+      border-radius: 8px;
+      padding: 0.6rem 0.85rem;
+    }
+
+    details.ai-expand summary {
+      font-weight: 700;
+      color: var(--violet);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem 1rem;
+      background: var(--navy);
+      color: #cbd5e1;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #5eead4;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-banner">
+    <div class="top-banner-inner">
+      <div class="brand-group">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#0d9488"/>
+          <circle cx="20" cy="20" r="12" stroke="#ffffff" stroke-width="2.2"/>
+          <ellipse cx="20" cy="20" rx="6" ry="12" stroke="#ffffff" stroke-width="1.8"/>
+          <line x1="8" y1="20" x2="32" y2="20" stroke="#ffffff" stroke-width="1.8"/>
+          <line x1="10" y1="14" x2="30" y2="14" stroke="#ffffff" stroke-width="1.4"/>
+          <line x1="10" y1="26" x2="30" y2="26" stroke="#ffffff" stroke-width="1.4"/>
+        </svg>
+        <div>
+          <h1 class="brand-title">World Newsroom: The Passive Voice Desk</h1>
+          <span class="fictional-badge">Classroom simulation: all scenarios are fictional.</span>
+        </div>
+      </div>
+
+      <div class="status-cluster" aria-live="polite">
+        <div class="status-pill" id="connectionPill">
+          <span class="status-dot connecting" id="connectionDot"></span>
+          <span id="connectionText">Connecting...</span>
+        </div>
+        <div class="status-pill" id="deskStatePill">
+          <span id="deskStateText">Newsroom Open</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Sub-header with In-Page Navigation & Disclosure -->
+  <nav class="sub-header" aria-label="In-page navigation">
+    <div class="sub-header-inner">
+      <div class="in-page-nav">
+        <a href="#correspondent-setup" class="nav-chip">1. Your Name</a>
+        <a href="#briefing-section" class="nav-chip">2. Briefing</a>
+        <a href="#writing-desk" class="nav-chip">3. News Feed Desk</a>
+        <a href="#feedback-section" class="nav-chip">4. AI &amp; Models</a>
+        <a href="#rolling-feed-section" class="nav-chip">5. Rolling News Feed</a>
+      </div>
+      <p class="privacy-notice">
+        Your name and submitted work are visible to anyone with this website link. AI feedback is generated by an external service and may contain mistakes.
+      </p>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Top Section: Guide & Name Input -->
+    <section class="top-Bar-grid" id="correspondent-setup">
+      <div class="card">
+        <h2 class="card-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Correspondent Guide
+        </h2>
+        <ol class="steps-list">
+          <li>Enter your real name.</li>
+          <li>Choose a city and read the briefing.</li>
+          <li>Write 20–50 words.</li>
+          <li>Explain your passive-voice choice.</li>
+          <li>Submit.</li>
+          <li>Request AI feedback and/or view supplied models.</li>
+          <li>Decide which suggestions to use.</li>
+          <li>Revise and resubmit.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="field-group">
+          <label for="studentNameInput">Your real name</label>
+          <p class="helper-text">
+            Enter the name your teacher has instructed you to use. This name will appear beside your submitted reports.
+          </p>
+          <input type="text" id="studentNameInput" maxlength="60" placeholder="e.g. Chan Tai Man / Chloe Wong" autocomplete="name">
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-top:0.65rem;">
+          <span style="font-size:0.82rem; color:var(--muted);" id="activeThreadStatus">New report thread ready</span>
+          <button type="button" class="btn-outline" id="startNewReportBtn" style="padding:0.4rem 0.75rem; min-height:36px; font-size:0.82rem;">
+            Start a New Report
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Two-Column Newsroom Workspace -->
+    <div class="workspace-grid">
+      <!-- LEFT COLUMN: Correspondent Briefing -->
+      <section class="card" id="briefing-section" aria-labelledby="briefingHeading">
+        <h2 class="card-title" id="briefingHeading">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Correspondent Briefing
+        </h2>
+
+        <div class="field-group">
+          <label for="citySelect">Select Reporting City</label>
+          <select id="citySelect"></select>
+        </div>
+
+        <div class="briefing-header-box">
+          <span class="city-pill city-hk" id="briefingCityBadge">Hong Kong</span>
+          <h3 id="briefingTitle">Loading briefing...</h3>
+          <p class="briefing-location" id="briefingLocation"></p>
+        </div>
+
+        <h4 style="margin:0.75rem 0 0.35rem 0; font-size:0.92rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.04em;">
+          Confirmed Factual Briefing
+        </h4>
+        <ul class="briefing-bullets" id="briefingBullets"></ul>
+      </section>
+
+      <!-- RIGHT COLUMN: News Feed Desk -->
+      <section class="card" id="writing-desk" aria-labelledby="newsFeedHeading">
+        <h2 class="card-title" id="newsFeedHeading">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/></svg>
+          News Feed
+        </h2>
+
+        <div class="byline-preview">
+          <div>
+            <strong>Byline Preview:</strong>
+            <span id="bylinePreviewName">Unnamed Correspondent</span> —
+            <span class="city-pill city-hk" id="bylinePreviewCity">Hong Kong</span>
+          </div>
+          <div id="versionEditingIndicator" style="font-weight:700; color:var(--violet);">
+            Drafting Version 1
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="newsFeedInput">News Feed: 20–50 words</label>
+          <p class="helper-text">
+            Write a clear fictional news update based strictly on the briefing facts. Use the passive voice where it serves a communicative purpose.
+          </p>
+          <textarea id="newsFeedInput" maxlength="600" placeholder="Write your 20–50-word news feed here..."></textarea>
+          <div class="word-count-bar wc-invalid" id="wordCountBar" aria-live="polite">
+            <span id="wordCountNumber">0 words</span>
+            <span id="wordCountStatus">Write at least 20 words.</span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="purposeInput">Purpose of using the passive voice</label>
+          <p class="helper-text">
+            In one or two sentences, explain why you chose the passive voice (e.g. what it foregrounds, why an agent is included or omitted, or why active voice was kept for part of the report). The 20–50-word limit does not apply here.
+          </p>
+          <textarea id="purposeInput" maxlength="600" style="min-height:78px;" placeholder="Explain your communicative purpose for using the passive voice..."></textarea>
+        </div>
+
+        <div class="field-group" id="reflectionGroup">
+          <label for="reflectionInput">Optional editorial reflection (for revisions or after feedback)</label>
+          <input type="text" id="reflectionInput" maxlength="400" placeholder="I accepted/rejected this suggestion because…">
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn-outline" id="saveDraftBtn">Save Draft</button>
+          <button type="button" class="btn-primary" id="submitNewsFeedBtn">Submit News Feed</button>
+          <button type="button" class="btn-violet" id="resubmitNewsFeedBtn" style="display:none;">Resubmit Revised News Feed</button>
+        </div>
+
+        <div class="alert-box" id="deskAlertBox" role="status" aria-live="polite"></div>
+
+        <!-- Post-Submission AI Copyeditor & Supplied Model Answers Section -->
+        <div class="panel-section" id="feedback-section">
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.5rem;">
+            <h3 style="margin:0; font-size:1.05rem;">Copy Desk &amp; Reference Tools</h3>
+            <span id="selectedVersionBadge" style="font-size:0.82rem; font-weight:700; color:var(--muted);">
+              Submit Version 1 to unlock
+            </span>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn-violet" id="requestAiFeedbackBtn" disabled>
+              AI Copyeditor’s Feedback
+            </button>
+            <button type="button" class="btn-outline" id="recheckAiFeedbackBtn" style="display:none;">
+              Request Fresh AI Recheck
+            </button>
+            <button type="button" class="btn-gold" id="viewModelAnswersBtn" disabled>
+              View Supplied Model Answers
+            </button>
+            <button type="button" class="btn-secondary" id="reviseMyFeedBtn" disabled>
+              Revise My News Feed
+            </button>
+          </div>
+
+          <!-- Genuine AI Copyeditor Output Panel -->
+          <div class="ai-panel" id="aiFeedbackPanel" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+              <h4 style="margin:0; color:var(--violet); font-size:1rem;">AI Copyeditor’s Feedback</h4>
+              <span id="aiVersionTargetLabel" style="font-size:0.78rem; font-weight:700;"></span>
+            </div>
+            <div class="advisory-banner">
+              AI suggestions are advisory. Check them against the briefing and make your own editorial decisions.
+            </div>
+            <div id="aiFeedbackContent"></div>
+          </div>
+
+          <!-- Supplied Model Answers Panel (Strictly separate from AI output) -->
+          <div class="model-panel" id="modelAnswersPanel" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;">
+              <h4 style="margin:0; color:#92400e; font-size:1rem;">Supplied Model Answers (Reference Scaffold)</h4>
+              <span style="font-size:0.78rem; font-weight:700; color:#92400e;">Authoritative Classroom Reference</span>
+            </div>
+            <div id="modelAnswerContent"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- BELOW: Rolling News Feed -->
+    <section class="card" id="rolling-feed-section" aria-labelledby="rollingFeedHeading">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:0.75rem; margin-bottom:0.85rem;">
+        <h2 class="card-title" id="rollingFeedHeading" style="margin:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+          Rolling News Feed
+        </h2>
+        <div id="newItemsBanner" style="display:none; background:var(--teal-soft); color:var(--teal-dark); padding:0.35rem 0.75rem; border-radius:999px; font-size:0.84rem; font-weight:700;">
+          Live wire updated (<span id="totalFeedCount">0</span> items)
+        </div>
+      </div>
+
+      <div class="feed-controls">
+        <div class="filter-group">
+          <label for="filterVersionMode" style="margin:0; font-size:0.85rem;">Display:</label>
+          <select id="filterVersionMode">
+            <option value="all">All versions</option>
+            <option value="latest">Latest versions only</option>
+          </select>
+
+          <label for="filterCitySelect" style="margin:0; font-size:0.85rem;">City:</label>
+          <select id="filterCitySelect">
+            <option value="all">All Cities</option>
+          </select>
+
+          <label for="filterCorrespondentInput" style="margin:0; font-size:0.85rem;">Correspondent:</label>
+          <input type="text" id="filterCorrespondentInput" placeholder="Filter by name...">
+        </div>
+      </div>
+
+      <div class="feed-grid" id="rollingFeedContainer">
+        <p style="color:var(--muted); margin:0.5rem 0;">Waiting for correspondents to file their reports...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p style="margin:0 0 0.4rem 0;">
+      World Newsroom: The Passive Voice Desk &bull; Secondary-School English Language Simulation
+    </p>
+    <p style="margin:0;">
+      <a href="teacher.html">Teacher Newsroom Chief Editor Dashboard</a>
+    </p>
+  </footer>
+
+  <!-- Pinned Firebase SDK (v10.12.2 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <script>
+    /********************************************************************
+     * 1. FIREBASE PUBLIC WEB CONFIGURATION PLACEHOLDER
+     * Replace these placeholders with your Firebase project's public web
+     * configuration. Do NOT put any secret OpenRouter API key here.
+     ********************************************************************/
+    const firebaseConfig = {
+      apiKey: "AIzaSyBC2pXyFZMbgbojSC4P4zpLkAh-GJCy0OQ",
+      authDomain: "world-newsroom.firebaseapp.com",
+      databaseURL: "https://world-newsroom-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "world-newsroom",
+      storageBucket: "world-newsroom.firebasestorage.app",
+      messagingSenderId: "424540273616",
+      appId: "1:424540273616:web:132034d1c550262c1b17d5",
+      measurementId: "G-QDL6DKWG0D"
+    };
+
+    /********************************************************************
+     * 2. STUDENT-SAFE BRIEFING & SUPPLIED MODEL ANSWER DATA
+     * Authoritative content from "10 Correspondent Briefings.docx".
+     * Notice: Protected editorial missions and editor's notes are strictly
+     * omitted from this student file.
+     ********************************************************************/
+    const STUDENT_BRIEFINGS = [
+      {
+        id: "hong-kong",
+        city: "Hong Kong",
+        badgeClass: "city-hk",
+        title: "A robot café mixes up its orders",
+        location: "You are outside a youth technology fair in Wan Chai.",
+        bullets: [
+          "You are outside a youth technology fair in Wan Chai.",
+          "A demonstration café uses a robot to prepare drinks.",
+          "Between 2.00 and 2.15 p.m., the robot sends 19 drinks to the wrong collection points.",
+          "Staff stop the demonstration and replace all 19 drinks free of charge.",
+          "No one is injured.",
+          "Technicians are checking the system.",
+          "The cause has not yet been established. Do not describe it as a confirmed software fault."
+        ],
+        modelFeed: "Nineteen drinks were sent to the wrong collection points during a robot demonstration. The system is being checked by technicians.",
+        modelPurpose: "Foreground the affected orders and ongoing reaction."
+      },
+      {
+        id: "beijing",
+        city: "Beijing",
+        badgeClass: "city-bj",
+        title: "Robot football final interrupted",
+        location: "You are beside an outdoor robot-football demonstration in Beijing.",
+        bullets: [
+          "You are beside an outdoor robot-football demonstration in Beijing.",
+          "Two student-designed teams are competing in a final.",
+          "At 3.20 p.m., one robot stops moving and blocks the goal.",
+          "Officials pause the match for ten minutes.",
+          "Engineers remove the robot from the pitch.",
+          "The remaining robots pass a safety check.",
+          "Officials announce that the match will resume at 4.30 p.m.",
+          "Engineers have not confirmed why the robot stopped."
+        ],
+        modelFeed: "The match has been paused after a robot stopped near the goal. It will be resumed at 4.30 p.m.",
+        modelPurpose: "Keep the match—not the officials—as the continuing topic. Naming officials remains acceptable; omission is not compulsory."
+      },
+      {
+        id: "tokyo",
+        city: "Tokyo",
+        badgeClass: "city-tk",
+        title: "Anime pop-up shop brings unexpected queues",
+        location: "You are reporting from a shopping street in Ikebukuro.",
+        bullets: [
+          "You are reporting from a shopping street in Ikebukuro.",
+          "An anime series opens a one-day merchandise shop.",
+          "By 10.00 a.m., 300 fans are waiting.",
+          "Shop organisers introduce numbered entry tickets.",
+          "The first 200 tickets are distributed within 20 minutes.",
+          "Later visitors receive afternoon entry times.",
+          "A limited-edition keyring sells out, but posters remain available.",
+          "Organisers say the shop will close at 6.00 p.m. as planned."
+        ],
+        modelFeed: "Numbered entry tickets are being distributed to manage the queue. The limited-edition keyrings have already sold out.",
+        modelPurpose: "Show that a good report needs not force every idea into the passive."
+      },
+      {
+        id: "seoul",
+        city: "Seoul",
+        badgeClass: "city-sl",
+        title: "K-pop dance videos used without permission",
+        location: "You are outside a youth music-and-technology festival.",
+        bullets: [
+          "You are outside a youth music-and-technology festival.",
+          "Twelve teenagers upload dance videos for a festival competition.",
+          "The festival’s marketing team includes clips from all twelve videos in an advertisement.",
+          "The teenagers have not given permission for advertising use.",
+          "After receiving complaints, the organisers remove the advertisement.",
+          "They apologise and promise a revised consent procedure.",
+          "The competition itself continues."
+        ],
+        modelFeed: "Twelve teenagers’ dance videos were used in an advertisement by the festival’s marketing team without permission.",
+        modelPurpose: "Foreground the teenagers’ affected work while retaining the responsible agent."
+      },
+      {
+        id: "bangkok",
+        city: "Bangkok",
+        badgeClass: "city-bk",
+        title: "Viral photo queue blocks a market entrance",
+        location: "You are outside a weekend market in Bangkok.",
+        bullets: [
+          "You are outside a weekend market in Bangkok.",
+          "A colourful mural becomes popular in short travel videos.",
+          "Visitors form a photo queue across one market entrance.",
+          "Stallholders complain that customers cannot enter easily.",
+          "Market managers move the queue to a marked area beside the mural.",
+          "Volunteers install signs showing an alternative entrance.",
+          "No stalls are closed.",
+          "Market managers will review the arrangement after the weekend."
+        ],
+        modelFeed: "The photo queue has been moved to a marked area, and signs have been installed to guide shoppers.",
+        modelPurpose: "Focus on practical changes affecting visitors."
+      },
+      {
+        id: "new-york-city",
+        city: "New York City",
+        badgeClass: "city-ny",
+        title: "Gaming tournament targeted by fake entry messages",
+        location: "You are outside a community gaming tournament in New York.",
+        bullets: [
+          "You are outside a community gaming tournament in New York.",
+          "Organisers discover messages offering “priority entry” for a payment.",
+          "Official entry to the tournament is free.",
+          "Eight participants report receiving the messages.",
+          "Two participants confirm that they paid.",
+          "Organisers warn entrants and report the messages to the platform.",
+          "The sender has not been identified.",
+          "No refund has yet been confirmed."
+        ],
+        modelFeed: "Eight participants have been sent fake payment requests. The sender has not yet been identified.",
+        modelPurpose: "Foreground those targeted; omit the agent because their identity is genuinely unknown."
+      },
+      {
+        id: "london",
+        city: "London",
+        badgeClass: "city-ld",
+        title: "Teen-designed game gives a park a virtual makeover",
+        location: "You are at a youth gaming showcase in London.",
+        bullets: [
+          "You are at a youth gaming showcase in London.",
+          "Twenty secondary-school students develop a game about redesigning a neglected park.",
+          "Players choose between a skate area, gardens and accessible paths.",
+          "A local community centre displays the game on six tablets.",
+          "Visitors can submit comments until Sunday.",
+          "The student team will present the results to community representatives.",
+          "No real construction project has been approved."
+        ],
+        modelFeed: "A park-design game has been created by twenty secondary-school students and is being displayed at a community centre.",
+        modelPurpose: "Introduce the product while giving its young creators credit."
+      },
+      {
+        id: "sydney",
+        city: "Sydney",
+        badgeClass: "city-sy",
+        title: "Students try a different kind of news feed",
+        location: "You are outside a secondary school in Sydney.",
+        bullets: [
+          "You are outside a secondary school in Sydney.",
+          "The school starts a four-week student-newsletter trial.",
+          "Students aged 13–15 can submit local stories through a school platform.",
+          "A teacher checks submissions before publication.",
+          "Approved stories appear on a school-only news page.",
+          "Students vote to make sport, music and transport regular sections.",
+          "The trial is optional.",
+          "The school has not claimed that newsletters should replace all social media."
+        ],
+        modelFeed: "Student reports will be checked before they are published on a school-only news page.",
+        modelPurpose: "Explain a process with the reports as the focus. The teacher may be named where readers need to understand who controls publication."
+      },
+      {
+        id: "paris",
+        city: "Paris",
+        badgeClass: "city-pr",
+        title: "A selfie installation is removed after access complaints",
+        location: "You are outside a youth arts exhibition in Paris.",
+        bullets: [
+          "You are outside a youth arts exhibition in Paris.",
+          "Exhibition organisers place a large mirror installation beside the entrance.",
+          "Visitors begin queuing for selfies.",
+          "Three wheelchair users report that the queue blocks the accessible route.",
+          "Organisers remove the installation that afternoon.",
+          "They apologise and promise to consult an accessibility adviser.",
+          "The exhibition remains open.",
+          "There is no confirmed injury."
+        ],
+        modelFeed: "The accessible entrance was blocked by a selfie queue. The mirror installation has since been removed by the organisers.",
+        modelPurpose: "Foreground the affected route. The report should still make the organisers’ decisions visible rather than presenting the problem as something that simply “happened”."
+      },
+      {
+        id: "rome",
+        city: "Rome",
+        badgeClass: "city-rm",
+        title: "Students’ street-history discovery awaits verification",
+        location: "You are beside a community history project in Rome.",
+        bullets: [
+          "You are beside a community history project in Rome.",
+          "Students photograph a carved stone fragment beside a courtyard wall.",
+          "They show the photographs to the project coordinator.",
+          "The coordinator contacts a local heritage specialist.",
+          "The courtyard owner temporarily ropes off the immediate area.",
+          "A specialist visit is scheduled for the following morning.",
+          "The fragment’s age and significance are not yet known.",
+          "No museum has agreed to display it."
+        ],
+        modelFeed: "A carved stone fragment has been photographed by students, and the area has been temporarily roped off. Its age has not yet been confirmed.",
+        modelPurpose: "Focus on the object and the verification process while recognising the students’ contribution."
+      }
+    ];
+
+    /********************************************************************
+     * 3. DETERMINISTIC WORD COUNT FUNCTION
+     * Whitespace-separated tokens; punctuation-only tokens excluded;
+     * contractions and hyphenated words count as one word.
+     ********************************************************************/
+    function countWords(text) {
+      if (!text || typeof text !== "string") return 0;
+      const tokens = text.trim().split(/\s+/);
+      let count = 0;
+      for (const token of tokens) {
+        if (!token) continue;
+        // Must contain at least one letter or digit (excludes punctuation-only tokens)
+        if (/[A-Za-z0-9\u00C0-\u024F]/.test(token)) {
+          count++;
+        }
+      }
+      return count;
+    }
+
+    /********************************************************************
+     * 4. APPLICATION STATE
+     ********************************************************************/
+    let db = null;
+    let auth = null;
+    let currentUid = null;
+    let firebaseReady = false;
+
+    let currentScenarioId = "hong-kong";
+    let activeReportId = null;
+    let selectedVersionId = null;
+    let isSubmitting = false;
+
+    let allReportsMap = {};
+    let allVersionsMap = {};
+    let allAiFeedbackMap = {};
+    let roomSettings = {
+      submissionsOpen: true,
+      aiEnabled: true
+    };
+
+    // DOM Elements
+    const studentNameInput = document.getElementById("studentNameInput");
+    const citySelect = document.getElementById("citySelect");
+    const briefingCityBadge = document.getElementById("briefingCityBadge");
+    const briefingTitle = document.getElementById("briefingTitle");
+    const briefingLocation = document.getElementById("briefingLocation");
+    const briefingBullets = document.getElementById("briefingBullets");
+
+    const bylinePreviewName = document.getElementById("bylinePreviewName");
+    const bylinePreviewCity = document.getElementById("bylinePreviewCity");
+    const versionEditingIndicator = document.getElementById("versionEditingIndicator");
+    const activeThreadStatus = document.getElementById("activeThreadStatus");
+
+    const newsFeedInput = document.getElementById("newsFeedInput");
+    const wordCountBar = document.getElementById("wordCountBar");
+    const wordCountNumber = document.getElementById("wordCountNumber");
+    const wordCountStatus = document.getElementById("wordCountStatus");
+    const purposeInput = document.getElementById("purposeInput");
+    const reflectionInput = document.getElementById("reflectionInput");
+
+    const saveDraftBtn = document.getElementById("saveDraftBtn");
+    const submitNewsFeedBtn = document.getElementById("submitNewsFeedBtn");
+    const resubmitNewsFeedBtn = document.getElementById("resubmitNewsFeedBtn");
+    const startNewReportBtn = document.getElementById("startNewReportBtn");
+    const deskAlertBox = document.getElementById("deskAlertBox");
+
+    const selectedVersionBadge = document.getElementById("selectedVersionBadge");
+    const requestAiFeedbackBtn = document.getElementById("requestAiFeedbackBtn");
+    const recheckAiFeedbackBtn = document.getElementById("recheckAiFeedbackBtn");
+    const viewModelAnswersBtn = document.getElementById("viewModelAnswersBtn");
+    const reviseMyFeedBtn = document.getElementById("reviseMyFeedBtn");
+
+    const aiFeedbackPanel = document.getElementById("aiFeedbackPanel");
+    const aiVersionTargetLabel = document.getElementById("aiVersionTargetLabel");
+    const aiFeedbackContent = document.getElementById("aiFeedbackContent");
+
+    const modelAnswersPanel = document.getElementById("modelAnswersPanel");
+    const modelAnswerContent = document.getElementById("modelAnswerContent");
+
+    const filterVersionMode = document.getElementById("filterVersionMode");
+    const filterCitySelect = document.getElementById("filterCitySelect");
+    const filterCorrespondentInput = document.getElementById("filterCorrespondentInput");
+    const rollingFeedContainer = document.getElementById("rollingFeedContainer");
+    const newItemsBanner = document.getElementById("newItemsBanner");
+    const totalFeedCount = document.getElementById("totalFeedCount");
+
+    const connectionDot = document.getElementById("connectionDot");
+    const connectionText = document.getElementById("connectionText");
+    const deskStateText = document.getElementById("deskStateText");
+
+    /********************************************************************
+     * 5. INITIALISATION & UI HELPERS
+     ********************************************************************/
+    function setConnectionStatus(state, label) {
+      connectionDot.className = "status-dot " + state;
+      connectionText.textContent = label;
+    }
+
+    function showAlert(message, type = "info") {
+      deskAlertBox.className = `alert-box show alert-${type}`;
+      deskAlertBox.textContent = message;
+    }
+
+    function clearAlert() {
+      deskAlertBox.className = "alert-box";
+      deskAlertBox.textContent = "";
+    }
+
+    function getScenarioById(id) {
+      return STUDENT_BRIEFINGS.find(b => b.id === id) || STUDENT_BRIEFINGS[0];
+    }
+
+    function populateCityDropdowns() {
+      citySelect.innerHTML = "";
+      filterCitySelect.innerHTML = "";
+
+      const allOpt = document.createElement("option");
+      allOpt.value = "all";
+      allOpt.textContent = "All Cities";
+      filterCitySelect.appendChild(allOpt);
+
+      STUDENT_BRIEFINGS.forEach((b, idx) => {
+        const opt = document.createElement("option");
+        opt.value = b.id;
+        opt.textContent = `${idx + 1}. ${b.city}`;
+        citySelect.appendChild(opt);
+
+        const filterOpt = document.createElement("option");
+        filterOpt.value = b.id;
+        filterOpt.textContent = b.city;
+        filterCitySelect.appendChild(filterOpt);
+      });
+    }
+
+    function renderBriefing(scenarioId) {
+      const scenario = getScenarioById(scenarioId);
+      briefingCityBadge.textContent = scenario.city;
+      briefingCityBadge.className = `city-pill ${scenario.badgeClass}`;
+      briefingTitle.textContent = scenario.title;
+      briefingLocation.textContent = scenario.location;
+
+      briefingBullets.innerHTML = "";
+      scenario.bullets.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        briefingBullets.appendChild(li);
+      });
+
+      bylinePreviewCity.textContent = scenario.city;
+      bylinePreviewCity.className = `city-pill ${scenario.badgeClass}`;
+    }
+
+    function updateWordCounter() {
+      const words = countWords(newsFeedInput.value);
+      wordCountNumber.textContent = `${words} ${words === 1 ? "word" : "words"}`;
+      if (words < 20) {
+        wordCountBar.className = "word-count-bar wc-invalid";
+        wordCountStatus.textContent = "Write at least 20 words.";
+      } else if (words <= 50) {
+        wordCountBar.className = "word-count-bar wc-valid";
+        wordCountStatus.textContent = "Within the word limit.";
+      } else {
+        wordCountBar.className = "word-count-bar wc-invalid";
+        wordCountStatus.textContent = "Reduce your news feed to 50 words or fewer.";
+      }
+    }
+
+    function updateBylinePreview() {
+      const nameVal = studentNameInput.value.trim();
+      bylinePreviewName.textContent = nameVal || "Unnamed Correspondent";
+      try {
+        localStorage.setItem("wn_student_name", nameVal);
+      } catch (e) {}
+    }
+
+    /********************************************************************
+     * 6. LOCAL DRAFT MANAGEMENT
+     ********************************************************************/
+    function getDraftKey(scenarioId) {
+      return `wn_draft_${scenarioId}`;
+    }
+
+    function saveLocalDraft() {
+      const draftObj = {
+        newsFeedText: newsFeedInput.value,
+        purposeText: purposeInput.value,
+        reflectionText: reflectionInput.value,
+        savedAt: new Date().toISOString()
+      };
+      try {
+        localStorage.setItem(getDraftKey(currentScenarioId), JSON.stringify(draftObj));
+        showAlert("Draft saved on this device.", "success");
+      } catch (e) {
+        showAlert("Could not save draft to browser storage.", "error");
+      }
+    }
+
+    function loadLocalDraftIfNoActiveThread(scenarioId) {
+      if (activeReportId) return;
+      try {
+        const raw = localStorage.getItem(getDraftKey(scenarioId));
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          newsFeedInput.value = parsed.newsFeedText || "";
+          purposeInput.value = parsed.purposeText || "";
+          reflectionInput.value = parsed.reflectionText || "";
+        } else {
+          newsFeedInput.value = "";
+          purposeInput.value = "";
+          reflectionInput.value = "";
+        }
+      } catch (e) {
+        newsFeedInput.value = "";
+        purposeInput.value = "";
+        reflectionInput.value = "";
+      }
+      updateWordCounter();
+    }
+
+    /********************************************************************
+     * 7. THREAD & VERSION SELECTION STATE
+     ********************************************************************/
+    function resetToNewReportThread(preserveInputs = false) {
+      activeReportId = null;
+      selectedVersionId = null;
+
+      submitNewsFeedBtn.style.display = "inline-flex";
+      resubmitNewsFeedBtn.style.display = "none";
+
+      versionEditingIndicator.textContent = "Drafting Version 1";
+      activeThreadStatus.textContent = "New report thread ready";
+      selectedVersionBadge.textContent = "Submit Version 1 to unlock";
+
+      requestAiFeedbackBtn.disabled = true;
+      recheckAiFeedbackBtn.style.display = "none";
+      viewModelAnswersBtn.disabled = true;
+      reviseMyFeedBtn.disabled = true;
+
+      aiFeedbackPanel.style.display = "none";
+      modelAnswersPanel.style.display = "none";
+
+      if (!preserveInputs) {
+        loadLocalDraftIfNoActiveThread(currentScenarioId);
+      }
+      clearAlert();
+    }
+
+    function selectSubmittedVersion(reportId, versionId, loadIntoEditor = false) {
+      const report = allReportsMap[reportId];
+      const version = allVersionsMap[versionId];
+      if (!report || !version) return;
+
+      activeReportId = reportId;
+      selectedVersionId = versionId;
+
+      if (currentScenarioId !== report.scenarioId) {
+        currentScenarioId = report.scenarioId;
+        citySelect.value = currentScenarioId;
+        renderBriefing(currentScenarioId);
+      }
+
+      const isOwner = currentUid && report.authorUid === currentUid;
+
+      selectedVersionBadge.textContent = `Selected: Version ${version.versionNumber} (${report.savedByline})`;
+
+      if (isOwner) {
+        submitNewsFeedBtn.style.display = "none";
+        resubmitNewsFeedBtn.style.display = "inline-flex";
+        requestAiFeedbackBtn.disabled = !roomSettings.aiEnabled;
+        viewModelAnswersBtn.disabled = false;
+        reviseMyFeedBtn.disabled = false;
+
+        const nextVerNum = (report.latestVersionNumber || version.versionNumber) + 1;
+        versionEditingIndicator.textContent = `Editing for Version ${nextVerNum} (from v${version.versionNumber})`;
+        activeThreadStatus.textContent = `Active thread: ${report.city} (v${version.versionNumber})`;
+
+        if (loadIntoEditor) {
+          newsFeedInput.value = version.newsFeedText || "";
+          purposeInput.value = version.purposeText || "";
+          reflectionInput.value = version.reflectionText || "";
+          updateWordCounter();
+        }
+      }
+
+      // Check if AI feedback already exists for THIS exact version
+      renderExistingAiFeedbackForVersion(versionId);
+    }
+
+    /********************************************************************
+     * 8. SUBMISSION & RESUBMISSION WORKFLOW
+     ********************************************************************/
+    async function handleReportSubmission(isRevision) {
+      clearAlert();
+
+      if (!roomSettings.submissionsOpen) {
+        showAlert("The teacher has currently paused new submissions.", "error");
+        return;
+      }
+
+      const enteredName = studentNameInput.value.trim();
+      if (!enteredName) {
+        showAlert("Please enter your real name before submitting.", "error");
+        studentNameInput.focus();
+        return;
+      }
+
+      const feedText = newsFeedInput.value.trim();
+      const purposeText = purposeInput.value.trim();
+      const reflectionText = reflectionInput.value.trim();
+
+      const wc = countWords(feedText);
+      if (wc < 20) {
+        showAlert("Write at least 20 words before submitting.", "error");
+        newsFeedInput.focus();
+        return;
+      }
+      if (wc > 50) {
+        showAlert("Reduce your news feed to 50 words or fewer before submitting.", "error");
+        newsFeedInput.focus();
+        return;
+      }
+
+      if (!purposeText) {
+        showAlert("Please explain your purpose for using the passive voice.", "error");
+        purposeInput.focus();
+        return;
+      }
+
+      if (!firebaseReady || !currentUid) {
+        showAlert("Database connection is not ready. Please check your Firebase configuration.", "error");
+        return;
+      }
+
+      if (isSubmitting) return;
+
+      const scenario = getScenarioById(currentScenarioId);
+
+      // Duplicate / unchanged check against latest saved version in this active thread
+      if (isRevision && activeReportId && selectedVersionId) {
+        const currentVer = allVersionsMap[selectedVersionId];
+        if (
+          currentVer &&
+          currentVer.newsFeedText.trim() === feedText &&
+          currentVer.purposeText.trim() === purposeText &&
+          (currentVer.reflectionText || "").trim() === reflectionText
+        ) {
+          showAlert("No changes to submit", "info");
+          return;
+        }
+      }
+
+      isSubmitting = true;
+      setConnectionStatus("saving", "Saving...");
+      submitNewsFeedBtn.disabled = true;
+      resubmitNewsFeedBtn.disabled = true;
+
+      try {
+        let reportId = activeReportId;
+        let versionNumber = 1;
+        let previousVersionId = null;
+        let savedByline = enteredName;
+
+        if (!isRevision || !reportId || !allReportsMap[reportId]) {
+          reportId = db.ref("newsroom/reports").push().key;
+        } else {
+          const existingReport = allReportsMap[reportId];
+          if (existingReport.authorUid !== currentUid) {
+            throw new Error("You can only revise your own report thread.");
+          }
+          savedByline = existingReport.savedByline; // Retain saved byline for thread
+          versionNumber = (existingReport.latestVersionNumber || 1) + 1;
+          previousVersionId = existingReport.latestVersionId || selectedVersionId;
+        }
+
+        const versionId = `${reportId}_v${versionNumber}`;
+        const nowServer = firebase.database.ServerValue.TIMESTAMP;
+
+        const versionRecord = {
+          versionId,
+          reportId,
+          versionNumber,
+          previousVersionId: previousVersionId || null,
+          authorUid: currentUid,
+          savedByline,
+          scenarioId: scenario.id,
+          city: scenario.city,
+          newsFeedText: feedText,
+          purposeText: purposeText,
+          reflectionText: reflectionText || "",
+          wordCount: wc,
+          createdAt: nowServer
+        };
+
+        const reportRecord = {
+          reportId,
+          authorUid: currentUid,
+          savedByline,
+          scenarioId: scenario.id,
+          city: scenario.city,
+          createdAt: isRevision && allReportsMap[reportId] ? allReportsMap[reportId].createdAt : nowServer,
+          updatedAt: nowServer,
+          latestVersionId: versionId,
+          latestVersionNumber: versionNumber
+        };
+
+        const updates = {};
+        updates[`newsroom/versions/${versionId}`] = versionRecord;
+        updates[`newsroom/reports/${reportId}`] = reportRecord;
+
+        await db.ref().update(updates);
+
+        // Local state immediate update
+        allVersionsMap[versionId] = { ...versionRecord, createdAt: Date.now() };
+        allReportsMap[reportId] = { ...reportRecord, updatedAt: Date.now() };
+
+        setConnectionStatus("connected", "Saved");
+        selectSubmittedVersion(reportId, versionId, false);
+
+        showAlert(
+          versionNumber === 1
+            ? "Version 1 submitted and published to the Rolling News Feed! You may now request AI Copyeditor’s Feedback or view Supplied Model Answers."
+            : `Version ${versionNumber} submitted to the Rolling News Feed! Request a fresh AI check if you would like feedback on this revised version.`,
+          "success"
+        );
+      } catch (err) {
+        setConnectionStatus("failed", "Save failed");
+        showAlert(`Submission failed: ${err.message}. Your writing has been kept safely in the editor.`, "error");
+      } finally {
+        isSubmitting = false;
+        submitNewsFeedBtn.disabled = false;
+        resubmitNewsFeedBtn.disabled = false;
+      }
+    }
+
+    /********************************************************************
+     * 9. GENUINE AI COPYEDITOR REQUEST & RENDERING
+     ********************************************************************/
+    function getExistingFeedbackForVersion(versionId) {
+      const matches = Object.values(allAiFeedbackMap).filter(f => f && f.versionId === versionId);
+      if (!matches.length) return null;
+      matches.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      return matches[0];
+    }
+
+    function renderExistingAiFeedbackForVersion(versionId) {
+      const version = allVersionsMap[versionId];
+      if (!version) {
+        aiFeedbackPanel.style.display = "none";
+        recheckAiFeedbackBtn.style.display = "none";
+        return;
+      }
+
+      const existing = getExistingFeedbackForVersion(versionId);
+      if (!existing) {
+        aiFeedbackPanel.style.display = "none";
+        recheckAiFeedbackBtn.style.display = "none";
+        return;
+      }
+
+      aiFeedbackPanel.style.display = "block";
+      recheckAiFeedbackBtn.style.display = roomSettings.aiEnabled ? "inline-flex" : "none";
+      aiVersionTargetLabel.textContent = `Assessed Version ${version.versionNumber} • Model: ${existing.model || "Configured AI"}`;
+      renderStructuredAiDom(aiFeedbackContent, existing);
+    }
+
+    function getCategoryClass(category) {
+      const c = (category || "").toLowerCase();
+      if (c.includes("gramma")) return "cat-grammar";
+      if (c.includes("styl")) return "cat-style";
+      if (c.includes("fact")) return "cat-fact";
+      return "cat-purpose";
+    }
+
+    function renderStructuredAiDom(container, fbRecord) {
+      container.innerHTML = "";
+
+      if (fbRecord.overallSummary) {
+        const summaryP = document.createElement("p");
+        summaryP.style.fontWeight = "600";
+        summaryP.style.margin = "0 0 0.75rem 0";
+        summaryP.textContent = fbRecord.overallSummary;
+        container.appendChild(summaryP);
+      }
+
+      const comments = Array.isArray(fbRecord.comments) ? fbRecord.comments : [];
+      comments.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "comment-card";
+
+        const badge = document.createElement("span");
+        badge.className = `comment-badge ${getCategoryClass(item.classification)}`;
+        badge.textContent = item.classification || "communicative-purpose concern";
+        card.appendChild(badge);
+
+        if (item.extract) {
+          const quote = document.createElement("div");
+          quote.className = "quote-extract";
+          quote.textContent = `“${item.extract}”`;
+          card.appendChild(quote);
+        }
+
+        const exp = document.createElement("p");
+        exp.style.margin = "0.35rem 0";
+        exp.style.fontSize = "0.9rem";
+        exp.textContent = item.explanation || "";
+        card.appendChild(exp);
+
+        if (item.suggestion) {
+          const sug = document.createElement("p");
+          sug.style.margin = "0.25rem 0 0 0";
+          sug.style.fontSize = "0.88rem";
+          sug.style.fontWeight = "600";
+          sug.style.color = "var(--navy)";
+          sug.textContent = `Suggestion: ${item.suggestion}`;
+          card.appendChild(sug);
+        }
+
+        container.appendChild(card);
+      });
+    }
+
+    async function requestAiFeedback(forceRecheck = false) {
+      if (!selectedVersionId || !activeReportId) {
+        showAlert("Submit your news feed first before requesting AI feedback.", "info");
+        return;
+      }
+
+      if (!roomSettings.aiEnabled) {
+        showAlert("AI copyeditor checks are currently paused by the teacher.", "info");
+        return;
+      }
+
+      // If cached feedback already exists for this exact version and not forcing a recheck, show cached
+      if (!forceRecheck) {
+        const cached = getExistingFeedbackForVersion(selectedVersionId);
+        if (cached) {
+          renderExistingAiFeedbackForVersion(selectedVersionId);
+          aiFeedbackPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          return;
+        }
+      }
+
+      const version = allVersionsMap[selectedVersionId];
+      if (!version) return;
+
+      aiFeedbackPanel.style.display = "block";
+      aiVersionTargetLabel.textContent = `Checking Version ${version.versionNumber}...`;
+      aiFeedbackContent.innerHTML = "";
+
+      const loadingP = document.createElement("p");
+      loadingP.textContent = "Contacting AI Copyeditor Desk... Please wait.";
+      aiFeedbackContent.appendChild(loadingP);
+
+      requestAiFeedbackBtn.disabled = true;
+      recheckAiFeedbackBtn.disabled = true;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 28000);
+
+      try {
+        const idToken = await auth.currentUser.getIdToken();
+        const response = await fetch("/.netlify/functions/ai-copyeditor", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${idToken}`
+          },
+          body: JSON.stringify({
+            reportId: activeReportId,
+            versionId: selectedVersionId,
+            forceRecheck: Boolean(forceRecheck)
+          }),
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          const msg = data.error || "AI copyeditor request failed.";
+          throw new Error(msg);
+        }
+
+        if (data.feedbackRecord && data.feedbackRecord.requestId) {
+          allAiFeedbackMap[data.feedbackRecord.requestId] = data.feedbackRecord;
+          renderExistingAiFeedbackForVersion(selectedVersionId);
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        aiFeedbackContent.innerHTML = "";
+        const errBox = document.createElement("div");
+        errBox.className = "alert-box show alert-error";
+        errBox.style.marginTop = "0";
+        errBox.textContent = err.name === "AbortError"
+          ? "The AI copyeditor request timed out. Your submitted report is safely preserved. You may retry or continue revising."
+          : `${err.message} (Your submitted report is safely preserved.)`;
+        aiFeedbackContent.appendChild(errBox);
+
+        const retryBtn = document.createElement("button");
+        retryBtn.type = "button";
+        retryBtn.className = "btn-outline";
+        retryBtn.style.marginTop = "0.65rem";
+        retryBtn.textContent = "Retry AI Copyeditor Check";
+        retryBtn.addEventListener("click", () => requestAiFeedback(forceRecheck));
+        aiFeedbackContent.appendChild(retryBtn);
+      } finally {
+        requestAiFeedbackBtn.disabled = !roomSettings.aiEnabled;
+        recheckAiFeedbackBtn.disabled = !roomSettings.aiEnabled;
+      }
+    }
+
+    /********************************************************************
+     * 10. SUPPLIED MODEL ANSWERS REVEAL (SEPARATE FROM AI)
+     ********************************************************************/
+    function showSuppliedModelAnswers() {
+      if (!selectedVersionId) {
+        showAlert("Submit Version 1 of your report first to unlock Supplied Model Answers.", "info");
+        return;
+      }
+      const version = allVersionsMap[selectedVersionId];
+      if (!version) return;
+
+      const scenario = getScenarioById(version.scenarioId);
+      const modelWc = countWords(scenario.modelFeed);
+
+      modelAnswersPanel.style.display = "block";
+      modelAnswerContent.innerHTML = "";
+
+      if (modelWc < 20 || modelWc > 50) {
+        const note = document.createElement("div");
+        note.className = "advisory-banner";
+        note.style.borderLeftColor = "var(--gold)";
+        note.textContent = "This model illustrates a possible passive-voice choice. Your own news feed must contain 20–50 words.";
+        modelAnswerContent.appendChild(note);
+      }
+
+      const grid = document.createElement("div");
+      grid.style.display = "grid";
+      grid.style.gridTemplateColumns = "repeat(auto-fit, minmax(240px, 1fr))";
+      grid.style.gap = "0.85rem";
+
+      const studentBox = document.createElement("div");
+      studentBox.style.background = "#ffffff";
+      studentBox.style.padding = "0.75rem";
+      studentBox.style.borderRadius = "8px";
+      studentBox.style.border = "1px solid #fde68a";
+
+      const sTitle = document.createElement("strong");
+      sTitle.textContent = `Your Submitted Report (Version ${version.versionNumber}):`;
+      const sFeed = document.createElement("p");
+      sFeed.style.margin = "0.4rem 0";
+      sFeed.textContent = version.newsFeedText;
+      const sPurpTitle = document.createElement("strong");
+      sPurpTitle.textContent = "Your Purpose Explanation:";
+      const sPurp = document.createElement("p");
+      sPurp.style.margin = "0.4rem 0 0 0";
+      sPurp.textContent = version.purposeText;
+      studentBox.append(sTitle, sFeed, sPurpTitle, sPurp);
+
+      const modelBox = document.createElement("div");
+      modelBox.style.background = "#ffffff";
+      modelBox.style.padding = "0.75rem";
+      modelBox.style.borderRadius = "8px";
+      modelBox.style.border = "1px solid #fde68a";
+
+      const mTitle = document.createElement("strong");
+      mTitle.textContent = `Supplied News-Feed Model Answer (${modelWc} words):`;
+      const mFeed = document.createElement("p");
+      mFeed.style.margin = "0.4rem 0";
+      mFeed.textContent = scenario.modelFeed;
+      const mPurpTitle = document.createElement("strong");
+      mPurpTitle.textContent = "Supplied Purpose Model Answer:";
+      const mPurp = document.createElement("p");
+      mPurp.style.margin = "0.4rem 0 0 0";
+      mPurp.textContent = scenario.modelPurpose;
+      modelBox.append(mTitle, mFeed, mPurpTitle, mPurp);
+
+      grid.append(studentBox, modelBox);
+      modelAnswerContent.appendChild(grid);
+      modelAnswersPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    /********************************************************************
+     * 11. ROLLING NEWS FEED RENDERING
+     ********************************************************************/
+    function renderRollingFeed() {
+      const mode = filterVersionMode.value;
+      const cityFilter = filterCitySelect.value;
+      const nameQuery = filterCorrespondentInput.value.trim().toLowerCase();
+
+      const allVersionsList = Object.values(allVersionsMap);
+      totalFeedCount.textContent = String(allVersionsList.length);
+      newItemsBanner.style.display = allVersionsList.length > 0 ? "inline-block" : "none";
+
+      let filtered = allVersionsList.filter(v => {
+        if (!v || !v.versionId) return false;
+        if (mode === "latest") {
+          const rep = allReportsMap[v.reportId];
+          if (rep && rep.latestVersionId && rep.latestVersionId !== v.versionId) {
+            return false;
+          }
+        }
+        if (cityFilter !== "all" && v.scenarioId !== cityFilter) return false;
+        if (nameQuery && !(v.savedByline || "").toLowerCase().includes(nameQuery)) return false;
+        return true;
+      });
+
+      filtered.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      rollingFeedContainer.innerHTML = "";
+      if (filtered.length === 0) {
+        const emptyP = document.createElement("p");
+        emptyP.style.color = "var(--muted)";
+        emptyP.textContent = "No news feeds match the current filters yet.";
+        rollingFeedContainer.appendChild(emptyP);
+        return;
+      }
+
+      filtered.forEach(ver => {
+        const scenario = getScenarioById(ver.scenarioId);
+        const isOwned = currentUid && ver.authorUid === currentUid;
+        const card = document.createElement("article");
+        card.className = `feed-card ${isOwned ? "owned-card" : ""}`;
+        card.id = `feed-card-${ver.versionId}`;
+
+        // Header
+        const header = document.createElement("div");
+        header.className = "feed-card-header";
+
+        const leftInfo = document.createElement("div");
+        leftInfo.style.display = "flex";
+        leftInfo.style.alignItems = "center";
+        leftInfo.style.flexWrap = "wrap";
+        leftInfo.style.gap = "0.5rem";
+
+        const citySpan = document.createElement("span");
+        citySpan.className = `city-pill ${scenario.badgeClass}`;
+        citySpan.textContent = scenario.city;
+
+        const bylineStrong = document.createElement("strong");
+        bylineStrong.textContent = ver.savedByline || "Correspondent";
+
+        const vTag = document.createElement("span");
+        vTag.className = `version-tag ${ver.versionNumber > 1 ? "revised" : ""}`;
+        vTag.textContent = `Version ${ver.versionNumber} • ${ver.versionNumber === 1 ? "Original Submission" : "Revised Submission"}`;
+
+        leftInfo.append(citySpan, bylineStrong, vTag);
+
+        const timeSpan = document.createElement("span");
+        timeSpan.style.fontSize = "0.8rem";
+        timeSpan.style.color = "var(--muted)";
+        timeSpan.textContent = ver.createdAt ? new Date(ver.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "";
+
+        header.append(leftInfo, timeSpan);
+        card.appendChild(header);
+
+        // Report Text
+        const bodyDiv = document.createElement("div");
+        bodyDiv.className = "feed-report-body";
+        bodyDiv.textContent = ver.newsFeedText;
+        card.appendChild(bodyDiv);
+
+        // Purpose Explanation
+        const purpDiv = document.createElement("div");
+        purpDiv.className = "feed-meta-box";
+        const purpLabel = document.createElement("strong");
+        purpLabel.textContent = "Purpose of using the passive voice: ";
+        const purpText = document.createElement("span");
+        purpText.textContent = ver.purposeText;
+        purpDiv.append(purpLabel, purpText);
+        card.appendChild(purpDiv);
+
+        // Optional Reflection
+        if (ver.reflectionText) {
+          const refDiv = document.createElement("div");
+          refDiv.className = "feed-meta-box";
+          const refLabel = document.createElement("strong");
+          refLabel.textContent = "Editorial Reflection: ";
+          const refSpan = document.createElement("span");
+          refSpan.textContent = ver.reflectionText;
+          refDiv.append(refLabel, refSpan);
+          card.appendChild(refDiv);
+        }
+
+        // Link to related versions in the same thread
+        const siblingVersions = Object.values(allVersionsMap)
+          .filter(x => x && x.reportId === ver.reportId && x.versionId !== ver.versionId)
+          .sort((a, b) => a.versionNumber - b.versionNumber);
+
+        if (siblingVersions.length > 0) {
+          const relDiv = document.createElement("div");
+          relDiv.className = "feed-meta-box";
+          relDiv.style.marginTop = "0.4rem";
+          const relStrong = document.createElement("strong");
+          relStrong.textContent = "Related versions in this thread: ";
+          relDiv.appendChild(relStrong);
+
+          siblingVersions.forEach((sib, i) => {
+            const linkBtn = document.createElement("button");
+            linkBtn.type = "button";
+            linkBtn.className = "btn-outline";
+            linkBtn.style.padding = "0.15rem 0.5rem";
+            linkBtn.style.minHeight = "28px";
+            linkBtn.style.fontSize = "0.78rem";
+            linkBtn.style.marginRight = "0.35rem";
+            linkBtn.textContent = `View v${sib.versionNumber}`;
+            linkBtn.addEventListener("click", () => {
+              filterVersionMode.value = "all";
+              renderRollingFeed();
+              const targetEl = document.getElementById(`feed-card-${sib.versionId}`);
+              if (targetEl) targetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            });
+            relDiv.appendChild(linkBtn);
+          });
+          card.appendChild(relDiv);
+        }
+
+        // Expandable AI Feedback section if available for this exact version
+        const fbRecord = getExistingFeedbackForVersion(ver.versionId);
+        if (fbRecord) {
+          const details = document.createElement("details");
+          details.className = "ai-expand";
+          const summary = document.createElement("summary");
+          summary.textContent = `AI Copyeditor’s Feedback (Version ${ver.versionNumber} — Advisory Only)`;
+          details.appendChild(summary);
+
+          const fbInner = document.createElement("div");
+          fbInner.style.marginTop = "0.65rem";
+          renderStructuredAiDom(fbInner, fbRecord);
+          details.appendChild(fbInner);
+          card.appendChild(details);
+        }
+
+        // Owner Controls on card
+        if (isOwned) {
+          const ownerActions = document.createElement("div");
+          ownerActions.className = "btn-row";
+          ownerActions.style.marginTop = "0.75rem";
+
+          const aiBtn = document.createElement("button");
+          aiBtn.type = "button";
+          aiBtn.className = "btn-violet";
+          aiBtn.style.padding = "0.4rem 0.75rem";
+          aiBtn.style.minHeight = "36px";
+          aiBtn.style.fontSize = "0.82rem";
+          aiBtn.textContent = "AI Copyeditor’s Feedback";
+          aiBtn.addEventListener("click", () => {
+            selectSubmittedVersion(ver.reportId, ver.versionId, false);
+            requestAiFeedback(false);
+            document.getElementById("feedback-section").scrollIntoView({ behavior: "smooth" });
+          });
+
+          const modelBtn = document.createElement("button");
+          modelBtn.type = "button";
+          modelBtn.className = "btn-gold";
+          modelBtn.style.padding = "0.4rem 0.75rem";
+          modelBtn.style.minHeight = "36px";
+          modelBtn.style.fontSize = "0.82rem";
+          modelBtn.textContent = "View Supplied Model Answers";
+          modelBtn.addEventListener("click", () => {
+            selectSubmittedVersion(ver.reportId, ver.versionId, false);
+            showSuppliedModelAnswers();
+          });
+
+          const editBtn = document.createElement("button");
+          editBtn.type = "button";
+          editBtn.className = "btn-secondary";
+          editBtn.style.padding = "0.4rem 0.75rem";
+          editBtn.style.minHeight = "36px";
+          editBtn.style.fontSize = "0.82rem";
+          editBtn.textContent = "Edit / Resubmit";
+          editBtn.addEventListener("click", () => {
+            selectSubmittedVersion(ver.reportId, ver.versionId, true);
+            document.getElementById("writing-desk").scrollIntoView({ behavior: "smooth" });
+          });
+
+          ownerActions.append(aiBtn, modelBtn, editBtn);
+          card.appendChild(ownerActions);
+        }
+
+        rollingFeedContainer.appendChild(card);
+      });
+    }
+
+    /********************************************************************
+     * 12. FIREBASE INITIALISATION & LIVE LISTENERS
+     ********************************************************************/
+    function initFirebaseApp() {
+      if (!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey === "YOUR_FIREBASE_PUBLIC_API_KEY") {
+        setConnectionStatus("failed", "Firebase Not Configured");
+        showAlert(
+          "Firebase is not configured yet. Follow the Setup Guide to add your public FIREBASE_CONFIG in index.html.",
+          "info"
+        );
+        return;
+      }
+
+      try {
+        firebase.initializeApp(FIREBASE_CONFIG);
+        auth = firebase.auth();
+        db = firebase.database();
+
+        // Connection status listener
+        db.ref(".info/connected").on("value", snap => {
+          if (snap.val() === true) {
+            setConnectionStatus("connected", "Connected");
+          } else {
+            setConnectionStatus("reconnecting", "Reconnecting...");
+          }
+        });
+
+        // Silent anonymous authentication
+        auth.onAuthStateChanged(user => {
+          if (user) {
+            currentUid = user.uid;
+            firebaseReady = true;
+            attachDatabaseListeners();
+          } else {
+            auth.signInAnonymously().catch(err => {
+              setConnectionStatus("failed", "Auth Error");
+              showAlert(`Anonymous sign-in failed: ${err.message}`, "error");
+            });
+          }
+        });
+      } catch (err) {
+        setConnectionStatus("failed", "Init Error");
+        showAlert(`Firebase initialisation error: ${err.message}`, "error");
+      }
+    }
+
+    function attachDatabaseListeners() {
+      db.ref("newsroom/settings").on("value", snap => {
+        const val = snap.val() || {};
+        roomSettings.submissionsOpen = val.submissionsOpen !== false;
+        roomSettings.aiEnabled = val.aiEnabled !== false;
+
+        deskStateText.textContent = roomSettings.submissionsOpen
+          ? (roomSettings.aiEnabled ? "Newsroom Open • AI Desk Ready" : "Newsroom Open • AICopyeditor Paused")
+          : "Submissions Closed by Teacher";
+
+        if (selectedVersionId) {
+          requestAiFeedbackBtn.disabled = !roomSettings.aiEnabled;
+        }
+      });
+
+      db.ref("newsroom/reports").on("value", snap => {
+        allReportsMap = snap.val() || {};
+        renderRollingFeed();
+      });
+
+      db.ref("newsroom/versions").on("value", snap => {
+        allVersionsMap = snap.val() || {};
+        renderRollingFeed();
+      });
+
+      db.ref("newsroom/aiFeedback").on("value", snap => {
+        allAiFeedbackMap = snap.val() || {};
+        if (selectedVersionId) {
+          renderExistingAiFeedbackForVersion(selectedVersionId);
+        }
+        renderRollingFeed();
+      });
+    }
+
+    /********************************************************************
+     * 13. EVENT LISTENERS
+     ********************************************************************/
+    window.addEventListener("DOMContentLoaded", () => {
+      populateCityDropdowns();
+
+      // Restore saved student name if present
+      try {
+        const savedName = localStorage.getItem("wn_student_name");
+        if (savedName) studentNameInput.value = savedName;
+      } catch (e) {}
+
+      updateBylinePreview();
+      renderBriefing(currentScenarioId);
+      loadLocalDraftIfNoActiveThread(currentScenarioId);
+
+      studentNameInput.addEventListener("input", updateBylinePreview);
+      newsFeedInput.addEventListener("input", updateWordCounter);
+
+      citySelect.addEventListener("change", () => {
+        currentScenarioId = citySelect.value;
+        renderBriefing(currentScenarioId);
+        // Changing city starts a new report thread
+        resetToNewReportThread(false);
+      });
+
+      startNewReportBtn.addEventListener("click", () => {
+        resetToNewReportThread(false);
+        newsFeedInput.value = "";
+        purposeInput.value = "";
+        reflectionInput.value = "";
+        updateWordCounter();
+        showAlert("Started a fresh report thread for " + getScenarioById(currentScenarioId).city + ".", "info");
+      });
+
+      saveDraftBtn.addEventListener("click", saveLocalDraft);
+      submitNewsFeedBtn.addEventListener("click", () => handleReportSubmission(false));
+      resubmitNewsFeedBtn.addEventListener("click", () => handleReportSubmission(true));
+
+      requestAiFeedbackBtn.addEventListener("click", () => requestAiFeedback(false));
+      recheckAiFeedbackBtn.addEventListener("click", () => requestAiFeedback(true));
+      viewModelAnswersBtn.addEventListener("click", showSuppliedModelAnswers);
+
+      reviseMyFeedBtn.addEventListener("click", () => {
+        if (!selectedVersionId || !activeReportId) return;
+        selectSubmittedVersion(activeReportId, selectedVersionId, true);
+        newsFeedInput.focus();
+        showAlert("Loaded your selected version into the editor. Make your revisions and click 'Resubmit Revised News Feed'.", "info");
+      });
+
+      filterVersionMode.addEventListener("change", renderRollingFeed);
+      filterCitySelect.addEventListener("change", renderRollingFeed);
+      filterCorrespondentInput.addEventListener("input", renderRollingFeed);
+
+      initFirebaseApp();
+    });
+  </script>
+</body>
+</html>

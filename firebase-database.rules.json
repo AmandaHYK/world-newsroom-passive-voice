@@ -1,0 +1,34 @@
+{
+  "rules": {
+    "newsroom": {
+      "settings": {
+        ".read": true,
+        ".write": "auth != null && root.child('newsroomAdmin/teacherAdmins').child(auth.uid).val() === true"
+      },
+      "reports": {
+        ".read": true,
+        ".write": "auth != null && root.child('newsroomAdmin/teacherAdmins').child(auth.uid).val() === true",
+        "$reportId": {
+          ".write": "auth != null && root.child('newsroom/settings/submissionsOpen').val() !== false && newData.exists() && ((!data.exists() && newData.child('authorUid').val() === auth.uid) || (data.exists() && data.child('authorUid').val() === auth.uid && newData.child('authorUid').val() === auth.uid && newData.child('savedByline').val() === data.child('savedByline').val()))",
+          ".validate": "newData.hasChildren(['reportId', 'authorUid', 'savedByline', 'scenarioId', 'city', 'latestVersionId', 'latestVersionNumber']) && newData.child('savedByline').isString() && newData.child('savedByline').val().length >= 1 && newData.child('savedByline').val().length <= 60 && newData.child('scenarioId').isString() && newData.child('latestVersionNumber').isNumber() && newData.child('latestVersionNumber').val() >= 1"
+        }
+      },
+      "versions": {
+        ".read": true,
+        ".write": "auth != null && root.child('newsroomAdmin/teacherAdmins').child(auth.uid).val() === true",
+        "$versionId": {
+          ".write": "auth != null && root.child('newsroom/settings/submissionsOpen').val() !== false && !data.exists() && newData.exists() && newData.child('authorUid').val() === auth.uid",
+          ".validate": "newData.hasChildren(['versionId', 'reportId', 'versionNumber', 'authorUid', 'savedByline', 'scenarioId', 'city', 'newsFeedText', 'purposeText', 'wordCount', 'createdAt']) && newData.child('newsFeedText').isString() && newData.child('newsFeedText').val().length >= 40 && newData.child('newsFeedText').val().length <= 600 && newData.child('purposeText').isString() && newData.child('purposeText').val().length >= 3 && newData.child('purposeText').val().length <= 600 && newData.child('wordCount').isNumber() && newData.child('wordCount').val() >= 20 && newData.child('wordCount').val() <= 50"
+        }
+      },
+      "aiFeedback": {
+        ".read": true,
+        ".write": "auth != null && root.child('newsroomAdmin/teacherAdmins').child(auth.uid).val() === true"
+      }
+    },
+    "newsroomAdmin": {
+      ".read": "auth != null && root.child('newsroomAdmin/teacherAdmins').child(auth.uid).val() === true",
+      ".write": "auth != null && root.child('newsroomAdmin/teacherAdmins').child(auth.uid).val() === true"
+    }
+  }
+}

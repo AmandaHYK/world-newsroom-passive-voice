@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Newsroom Chief Editor — World Newsroom</title>
+  <style>
+    :root {
+      --navy: #0f172a;
+      --navy-light: #1e293b;
+      --teal: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-soft: #f0fdfa;
+      --coral: #e11d48;
+      --coral-soft: #fff1f2;
+      --gold: #d97706;
+      --gold-soft: #fffbeb;
+      --violet: #7c3aed;
+      --violet-soft: #f5f3ff;
+      --bg: #f1f5f9;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .top-header {
+      background: var(--navy);
+      color: #ffffff;
+      padding: 1rem 1.25rem;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .top-header-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header-title {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .header-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .student-link {
+      background: var(--teal);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--navy-light);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .container {
+      max-width: 1360px;
+      margin: 1.25rem auto;
+      padding: 0 1rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-top: 0.2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 1.25rem;
+    }
+
+    .card-title {
+      margin: 0 0 0.85rem 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 960px) {
+      .admin-grid {
+        grid-template-columns: 1fr 1.3fr;
+      }
+    }
+
+    .main-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 1024px) {
+      .main-split {
+        grid-template-columns: 1fr 1.25fr;
+        align-items: start;
+      }
+    }
+
+    input, select {
+      padding: 0.55rem 0.75rem;
+      font-size: 0.92rem;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.55rem 0.95rem;
+      min-height: 40px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary { background: var(--teal); color: #ffffff; }
+    .btn-danger { background: var(--coral); color: #ffffff; }
+    .btn-secondary { background: var(--navy); color: #ffffff; }
+    .btn-outline { background: #ffffff; color: var(--navy); border-color: var(--border); }
+
+    .ref-block {
+      background: var(--gold-soft);
+      border: 1px solid #fde68a;
+      border-radius: 8px;
+      padding: 0.85rem;
+      margin-top: 0.75rem;
+    }
+
+    .mission-block {
+      background: var(--coral-soft);
+      border-left: 4px solid var(--coral);
+      padding: 0.75rem;
+      border-radius: 6px;
+      margin: 0.75rem 0;
+    }
+
+    .submission-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+      background: #ffffff;
+    }
+
+    .comparison-box {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      background: var(--bg);
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-top: 0.65rem;
+    }
+
+    @media (min-width: 680px) {
+      .comparison-box {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .wc-badge {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-header">
+    <div class="top-header-inner">
+      <div>
+        <h1 class="header-title">Teacher Newsroom Chief Editor</h1>
+        <span style="font-size:0.84rem; color:#fde68a;">
+          Requirement: 20–50 words per news feed • Classroom simulation: all scenarios are fictional.
+        </span>
+      </div>
+      <div class="header-links">
+        <div class="status-pill">
+          <span class="status-dot" id="teacherConnDot"></span>
+          <span id="teacherConnText">Connecting...</span>
+        </div>
+        <a href="index.html" class="student-link">Open Student View (index.html)</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Live Metrics Bar -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Report Threads</div>
+        <div class="stat-value" id="statReportsCount">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Total Submitted Versions</div>
+        <div class="stat-value" id="statVersionsCount">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">AI Copyeditor Checks</div>
+        <div class="stat-value" id="statAiChecksCount">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Required Word Range</div>
+        <div class="stat-value" style="font-size:1.3rem;">20–50 words</div>
+      </div>
+    </section>
+
+    <!-- Administrative Controls (Protected by Firebase Auth) -->
+    <section class="card">
+      <h2 class="card-title">Chief Editor Administrative Controls</h2>
+      <div class="admin-grid">
+        <div>
+          <p style="margin:0 0 0.5rem 0; font-size:0.88rem; color:var(--muted);">
+            Sign in with your authorised Firebase Teacher Email &amp; Password to change room settings or clear records. (No teacher passwords are stored in this HTML.)
+          </p>
+          <div id="teacherLoginForm" style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+            <input type="email" id="teacherEmailInput" placeholder="Teacher email">
+            <input type="password" id="teacherPasswordInput" placeholder="Password">
+            <button type="button" class="btn-secondary" id="teacherLoginBtn">Teacher Sign In</button>
+          </div>
+          <div id="teacherLoggedInBar" style="display:none; align-items:center; gap:0.75rem; margin-top:0.5rem;">
+            <span id="teacherUserLabel" style="font-weight:700; font-size:0.9rem; color:var(--teal-dark);"></span>
+            <button type="button" class="btn-outline" id="teacherLogoutBtn">Sign Out</button>
+          </div>
+          <p id="adminStatusMsg" style="font-size:0.85rem; font-weight:600; margin:0.5rem 0 0 0;"></p>
+        </div>
+
+        <div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.6rem; align-items:center;">
+            <button type="button" class="btn-primary" id="toggleSubmissionsBtn" disabled>
+              Submissions: Open
+            </button>
+            <button type="button" class="btn-primary" id="toggleAiBtn" disabled>
+              AI Copyeditor: Enabled
+            </button>
+            <button type="button" class="btn-danger" id="clearRecordsBtn" disabled>
+              Clear Classroom Records
+            </button>
+          </div>
+          <p style="font-size:0.82rem; color:var(--muted); margin:0.5rem 0 0 0;" id="usageLimitReadout">
+            Server Usage Caps: Per-Student Limit = 15 checks | Newsroom Cap = 300 checks (Enforced server-side)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Side-by-Side Reference & Student Submissions -->
+    <div class="main-split">
+      <!-- LEFT: Authoritative Teacher Reference Material (All 10 Cities) -->
+      <section class="card">
+        <h2 class="card-title">Full Editorial Reference &amp; Answer Key</h2>
+        <p style="font-size:0.84rem; color:var(--muted); margin-top:0;">
+          Includes protected Editorial Missions, Supplied Model Answers and Editor’s Notes from the authoritative document.
+        </p>
+
+        <div style="margin-bottom:0.85rem;">
+          <label for="teacherRefCitySelect" style="font-weight:700; font-size:0.9rem;">Inspect Scenario Reference:</label>
+          <select id="teacherRefCitySelect" style="width:100%; margin-top:0.35rem;"></select>
+        </div>
+
+        <div id="teacherReferenceDetail"></div>
+      </section>
+
+      <!-- RIGHT: Live Student Submissions, Revisions & AI Feedback -->
+      <section class="card">
+        <h2 class="card-title">Live Correspondent Submissions &amp; Revisions</h2>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:1rem; background:var(--bg); padding:0.75rem; border-radius:8px;">
+          <select id="tFilterCity">
+            <option value="all">All Cities</option>
+          </select>
+          <input type="text" id="tFilterStudent" placeholder="Filter by student name...">
+          <select id="tFilterVersion">
+            <option value="all">All Versions</option>
+            <option value="latest">Latest Version per Thread</option>
+            <option value="revised">Revisions Only (v2+)</option>
+          </select>
+        </div>
+
+        <div id="teacherSubmissionsList">
+          <p style="color:var(--muted);">Loading classroom submissions...</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Pinned Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <script>
+    /********************************************************************
+     * 1. FIREBASE PUBLIC CONFIGURATION PLACEHOLDER
+     ********************************************************************/
+    const firebaseConfig = {
+      apiKey: "AIzaSyBC2pXyFZMbgbojSC4P4zpLkAh-GJCy0OQ",
+      authDomain: "world-newsroom.firebaseapp.com",
+      databaseURL: "https://world-newsroom-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "world-newsroom",
+      storageBucket: "world-newsroom.firebasestorage.app",
+      messagingSenderId: "424540273616",
+      appId: "1:424540273616:web:132034d1c550262c1b17d5",
+      measurementId: "G-QDL6DKWG0D"
+    };
+
+    /********************************************************************
+     * 2. FULL TEACHER REFERENCE DATA (Includes Missions & Editor's Notes)
+     ********************************************************************/
+    const TEACHER_REFERENCE = [
+      {
+        id: "hong-kong",
+        city: "Hong Kong",
+        title: "A robot café mixes up its orders",
+        location: "You are outside a youth technology fair in Wan Chai.",
+        bullets: [
+          "You are outside a youth technology fair in Wan Chai.",
+          "A demonstration café uses a robot to prepare drinks.",
+          "Between 2.00 and 2.15 p.m., the robot sends 19 drinks to the wrong collection points.",
+          "Staff stop the demonstration and replace all 19 drinks free of charge.",
+          "No one is injured.",
+          "Technicians are checking the system.",
+          "The cause has not yet been established. Do not describe it as a confirmed software fault."
+        ],
+        editorialMission: "Tell visitors what happened and what is being done, without blaming an unconfirmed cause.",
+        modelFeed: "Nineteen drinks were sent to the wrong collection points during a robot demonstration. The system is being checked by technicians.",
+        modelPurpose: "Foreground the affected orders and ongoing reaction.",
+        editorsNote: "Do not confirm a software fault."
+      },
+      {
+        id: "beijing",
+        city: "Beijing",
+        title: "Robot football final interrupted",
+        location: "You are beside an outdoor robot-football demonstration in Beijing.",
+        bullets: [
+          "You are beside an outdoor robot-football demonstration in Beijing.",
+          "Two student-designed teams are competing in a final.",
+          "At 3.20 p.m., one robot stops moving and blocks the goal.",
+          "Officials pause the match for ten minutes.",
+          "Engineers remove the robot from the pitch.",
+          "The remaining robots pass a safety check.",
+          "Officials announce that the match will resume at 4.30 p.m.",
+          "Engineers have not confirmed why the robot stopped."
+        ],
+        editorialMission: "Inform waiting spectators about the interruption and restart.",
+        modelFeed: "The match has been paused after a robot stopped near the goal. It will be resumed at 4.30 p.m.",
+        modelPurpose: "Keep the match—not the officials—as the continuing topic. Naming officials remains acceptable; omission is not compulsory.",
+        editorsNote: "Preserve the interruption and announced 4.30 p.m. restart accurately."
+      },
+      {
+        id: "tokyo",
+        city: "Tokyo",
+        title: "Anime pop-up shop brings unexpected queues",
+        location: "You are reporting from a shopping street in Ikebukuro.",
+        bullets: [
+          "You are reporting from a shopping street in Ikebukuro.",
+          "An anime series opens a one-day merchandise shop.",
+          "By 10.00 a.m., 300 fans are waiting.",
+          "Shop organisers introduce numbered entry tickets.",
+          "The first 200 tickets are distributed within 20 minutes.",
+          "Later visitors receive afternoon entry times.",
+          "A limited-edition keyring sells out, but posters remain available.",
+          "Organisers say the shop will close at 6.00 p.m. as planned."
+        ],
+        editorialMission: "Help fans decide whether to visit and explain the entry arrangements.",
+        modelFeed: "Numbered entry tickets are being distributed to manage the queue. The limited-edition keyrings have already sold out.",
+        modelPurpose: "Show that a good report needs not force every idea into the passive.",
+        editorsNote: "“The limited-edition keyrings have all been sold” is awkward; the active construction is more natural: “The limited-edition keyrings have sold out.”"
+      },
+      {
+        id: "seoul",
+        city: "Seoul",
+        title: "K-pop dance videos used without permission",
+        location: "You are outside a youth music-and-technology festival.",
+        bullets: [
+          "You are outside a youth music-and-technology festival.",
+          "Twelve teenagers upload dance videos for a festival competition.",
+          "The festival’s marketing team includes clips from all twelve videos in an advertisement.",
+          "The teenagers have not given permission for advertising use.",
+          "After receiving complaints, the organisers remove the advertisement.",
+          "They apologise and promise a revised consent procedure.",
+          "The competition itself continues."
+        ],
+        editorialMission: "Explain both what happened to the teenagers’ work and who was responsible.",
+        modelFeed: "Twelve teenagers’ dance videos were used in an advertisement by the festival’s marketing team without permission.",
+        modelPurpose: "Foreground the teenagers’ affected work while retaining the responsible agent. “The videos were used without permission” is grammatical, but the editor should question whether it conceals important responsibility.",
+        editorsNote: "Do not obscure the marketing team’s responsibility."
+      },
+      {
+        id: "bangkok",
+        city: "Bangkok",
+        title: "Viral photo queue blocks a market entrance",
+        location: "You are outside a weekend market in Bangkok.",
+        bullets: [
+          "You are outside a weekend market in Bangkok.",
+          "A colourful mural becomes popular in short travel videos.",
+          "Visitors form a photo queue across one market entrance.",
+          "Stallholders complain that customers cannot enter easily.",
+          "Market managers move the queue to a marked area beside the mural.",
+          "Volunteers install signs showing an alternative entrance.",
+          "No stalls are closed.",
+          "Market managers will review the arrangement after the weekend."
+        ],
+        editorialMission: "Tell visitors how access has changed without exaggerating the disruption.",
+        modelFeed: "The photo queue has been moved to a marked area, and signs have been installed to guide shoppers.",
+        modelPurpose: "Focus on practical changes affecting visitors. “The market has been closed” must be rejected because it contradicts the briefing.",
+        editorsNote: "Do not claim the market closed."
+      },
+      {
+        id: "new-york-city",
+        city: "New York City",
+        title: "Gaming tournament targeted by fake entry messages",
+        location: "You are outside a community gaming tournament in New York.",
+        bullets: [
+          "You are outside a community gaming tournament in New York.",
+          "Organisers discover messages offering “priority entry” for a payment.",
+          "Official entry to the tournament is free.",
+          "Eight participants report receiving the messages.",
+          "Two participants confirm that they paid.",
+          "Organisers warn entrants and report the messages to the platform.",
+          "The sender has not been identified.",
+          "No refund has yet been confirmed."
+        ],
+        editorialMission: "Warn readers clearly while respecting what remains unknown.",
+        modelFeed: "Eight participants have been sent fake payment requests. The sender has not yet been identified.",
+        modelPurpose: "Foreground those targeted; omit the agent because their identity is genuinely unknown. “The money has been refunded” must trigger a factual warning.",
+        editorsNote: "Sender unknown; no confirmed refund."
+      },
+      {
+        id: "london",
+        city: "London",
+        title: "Teen-designed game gives a park a virtual makeover",
+        location: "You are at a youth gaming showcase in London.",
+        bullets: [
+          "You are at a youth gaming showcase in London.",
+          "Twenty secondary-school students develop a game about redesigning a neglected park.",
+          "Players choose between a skate area, gardens and accessible paths.",
+          "A local community centre displays the game on six tablets.",
+          "Visitors can submit comments until Sunday.",
+          "The student team will present the results to community representatives.",
+          "No real construction project has been approved."
+        ],
+        editorialMission: "Explain the students’ achievement without confusing a simulation with an actual redevelopment.",
+        modelFeed: "A park-design game has been created by twenty secondary-school students and is being displayed at a community centre.",
+        modelPurpose: "Introduce the product while giving its young creators credit. “The park will be rebuilt” is unsupported.",
+        editorsNote: "A game simulation is not an approved real construction project."
+      },
+      {
+        id: "sydney",
+        city: "Sydney",
+        title: "Students try a different kind of news feed",
+        location: "You are outside a secondary school in Sydney.",
+        bullets: [
+          "You are outside a secondary school in Sydney.",
+          "The school starts a four-week student-newsletter trial.",
+          "Students aged 13–15 can submit local stories through a school platform.",
+          "A teacher checks submissions before publication.",
+          "Approved stories appear on a school-only news page.",
+          "Students vote to make sport, music and transport regular sections.",
+          "The trial is optional.",
+          "The school has not claimed that newsletters should replace all social media."
+        ],
+        editorialMission: "Explain what students can contribute and how publication works.",
+        modelFeed: "Student reports will be checked before they are published on a school-only news page.",
+        modelPurpose: "Explain a process with the reports as the focus. The teacher may be named where readers need to understand who controls publication.",
+        editorsNote: "The optional trial does not replace all social media."
+      },
+      {
+        id: "paris",
+        city: "Paris",
+        title: "A selfie installation is removed after access complaints",
+        location: "You are outside a youth arts exhibition in Paris.",
+        bullets: [
+          "You are outside a youth arts exhibition in Paris.",
+          "Exhibition organisers place a large mirror installation beside the entrance.",
+          "Visitors begin queuing for selfies.",
+          "Three wheelchair users report that the queue blocks the accessible route.",
+          "Organisers remove the installation that afternoon.",
+          "They apologise and promise to consult an accessibility adviser.",
+          "The exhibition remains open.",
+          "There is no confirmed injury."
+        ],
+        editorialMission: "Centre the access problem and explain the organisers’ response.",
+        modelFeed: "The accessible entrance was blocked by a selfie queue. The mirror installation has since been removed by the organisers.",
+        modelPurpose: "Foreground the affected route. The report should still make the organisers’ decisions visible rather than presenting the problem as something that simply “happened”.",
+        editorsNote: "No confirmed injury; exhibition remains open."
+      },
+      {
+        id: "rome",
+        city: "Rome",
+        title: "Students’ street-history discovery awaits verification",
+        location: "You are beside a community history project in Rome.",
+        bullets: [
+          "You are beside a community history project in Rome.",
+          "Students photograph a carved stone fragment beside a courtyard wall.",
+          "They show the photographs to the project coordinator.",
+          "The coordinator contacts a local heritage specialist.",
+          "The courtyard owner temporarily ropes off the immediate area.",
+          "A specialist visit is scheduled for the following morning.",
+          "The fragment’s age and significance are not yet known.",
+          "No museum has agreed to display it."
+        ],
+        editorialMission: "Make the discovery interesting without announcing an unverified ancient treasure.",
+        modelFeed: "A carved stone fragment has been photographed by students, and the area has been temporarily roped off. Its age has not yet been confirmed.",
+        modelPurpose: "Focus on the object and the verification process while recognising the students’ contribution. “An ancient Roman treasure has been discovered” overstates the evidence.",
+        editorsNote: "Age and significance unverified; no museum agreement."
+      }
+    ];
+
+    let db = null;
+    let auth = null;
+    let isTeacherAdmin = false;
+
+    let reportsMap = {};
+    let versionsMap = {};
+    let aiFeedbackMap = {};
+    let roomSettings = { submissionsOpen: true, aiEnabled: true };
+
+    const teacherRefCitySelect = document.getElementById("teacherRefCitySelect");
+    const teacherReferenceDetail = document.getElementById("teacherReferenceDetail");
+    const tFilterCity = document.getElementById("tFilterCity");
+    const tFilterStudent = document.getElementById("tFilterStudent");
+    const tFilterVersion = document.getElementById("tFilterVersion");
+    const teacherSubmissionsList = document.getElementById("teacherSubmissionsList");
+
+    const statReportsCount = document.getElementById("statReportsCount");
+    const statVersionsCount = document.getElementById("statVersionsCount");
+    const statAiChecksCount = document.getElementById("statAiChecksCount");
+
+    const toggleSubmissionsBtn = document.getElementById("toggleSubmissionsBtn");
+    const toggleAiBtn = document.getElementById("toggleAiBtn");
+    const clearRecordsBtn = document.getElementById("clearRecordsBtn");
+    const adminStatusMsg = document.getElementById("adminStatusMsg");
+    const usageLimitReadout = document.getElementById("usageLimitReadout");
+
+    function initTeacherSelects() {
+      TEACHER_REFERENCE.forEach((sc, i) => {
+        const opt1 = document.createElement("option");
+        opt1.value = sc.id;
+        opt1.textContent = `${i + 1}. ${sc.city} — ${sc.title}`;
+        teacherRefCitySelect.appendChild(opt1);
+
+        const opt2 = document.createElement("option");
+        opt2.value = sc.id;
+        opt2.textContent = sc.city;
+        tFilterCity.appendChild(opt2);
+      });
+    }
+
+    function renderTeacherReference(scenarioId) {
+      const sc = TEACHER_REFERENCE.find(x => x.id === scenarioId) || TEACHER_REFERENCE[0];
+      teacherReferenceDetail.innerHTML = "";
+
+      const h3 = document.createElement("h3");
+      h3.style.margin = "0 0 0.35rem 0";
+      h3.textContent = `${sc.city}: ${sc.title}`;
+
+      const ul = document.createElement("ul");
+      ul.style.paddingLeft = "1.2rem";
+      sc.bullets.forEach(b => {
+        const li = document.createElement("li");
+        li.textContent = b;
+        ul.appendChild(li);
+      });
+
+      const missionDiv = document.createElement("div");
+      missionDiv.className = "mission-block";
+      const mLabel = document.createElement("strong");
+      mLabel.textContent = "Protected Editorial Mission: ";
+      const mText = document.createElement("span");
+      mText.textContent = sc.editorialMission;
+      missionDiv.append(mLabel, mText);
+
+      const modelDiv = document.createElement("div");
+      modelDiv.className = "ref-block";
+      const mfLabel = document.createElement("strong");
+      mfLabel.textContent = "Supplied News-Feed Model Answer:";
+      const mfP = document.createElement("p");
+      mfP.style.margin = "0.25rem 0 0.65rem 0";
+      mfP.textContent = sc.modelFeed;
+
+      const mpLabel = document.createElement("strong");
+      mpLabel.textContent = "Supplied Purpose Model Answer:";
+      const mpP = document.createElement("p");
+      mpP.style.margin = "0.25rem 0 0.65rem 0";
+      mpP.textContent = sc.modelPurpose;
+
+      const enLabel = document.createElement("strong");
+      enLabel.textContent = "Editor’s Note / Constraint:";
+      const enP = document.createElement("p");
+      enP.style.margin = "0.25rem 0 0 0";
+      enP.textContent = sc.editorsNote;
+
+      modelDiv.append(mfLabel, mfP, mpLabel, mpP, enLabel, enP);
+      teacherReferenceDetail.append(h3, ul, missionDiv, modelDiv);
+    }
+
+    function renderTeacherSubmissions() {
+      const allReports = Object.values(reportsMap);
+      const allVersions = Object.values(versionsMap);
+      const allFeedback = Object.values(aiFeedbackMap);
+
+      statReportsCount.textContent = String(allReports.length);
+      statVersionsCount.textContent = String(allVersions.length);
+      statAiChecksCount.textContent = String(allFeedback.length);
+
+      const cityVal = tFilterCity.value;
+      const studentVal = tFilterStudent.value.trim().toLowerCase();
+      const verMode = tFilterVersion.value;
+
+      let list = allVersions.filter(v => {
+        if (!v || !v.versionId) return false;
+        if (cityVal !== "all" && v.scenarioId !== cityVal) return false;
+        if (studentVal && !(v.savedByline || "").toLowerCase().includes(studentVal)) return false;
+        if (verMode === "latest") {
+          const r = reportsMap[v.reportId];
+          if (r && r.latestVersionId !== v.versionId) return false;
+        }
+        if (verMode === "revised" && v.versionNumber < 2) return false;
+        return true;
+      });
+
+      list.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      teacherSubmissionsList.innerHTML = "";
+      if (!list.length) {
+        const p = document.createElement("p");
+        p.style.color = "var(--muted)";
+        p.textContent = "No matching student submissions.";
+        teacherSubmissionsList.appendChild(p);
+        return;
+      }
+
+      list.forEach(ver => {
+        const card = document.createElement("div");
+        card.className = "submission-card";
+
+        const topRow = document.createElement("div");
+        topRow.style.display = "flex";
+        topRow.style.justifyContent = "space-between";
+        topRow.style.flexWrap = "wrap";
+        topRow.style.gap = "0.5rem";
+
+        const titleStrong = document.createElement("strong");
+        titleStrong.textContent = `${ver.savedByline} (${ver.city}) — Version ${ver.versionNumber}`;
+
+        const rightBadges = document.createElement("div");
+        rightBadges.style.display = "flex";
+        rightBadges.style.gap = "0.5rem";
+        rightBadges.style.alignItems = "center";
+
+        const wcSpan = document.createElement("span");
+        wcSpan.className = "wc-badge";
+        wcSpan.textContent = `${ver.wordCount || 0} words`;
+
+        const inspectRefBtn = document.createElement("button");
+        inspectRefBtn.type = "button";
+        inspectRefBtn.className = "btn-outline";
+        inspectRefBtn.style.padding = "0.2rem 0.6rem";
+        inspectRefBtn.style.minHeight = "30px";
+        inspectRefBtn.style.fontSize = "0.78rem";
+        inspectRefBtn.textContent = "Load City Reference";
+        inspectRefBtn.addEventListener("click", () => {
+          teacherRefCitySelect.value = ver.scenarioId;
+          renderTeacherReference(ver.scenarioId);
+        });
+
+        rightBadges.append(wcSpan, inspectRefBtn);
+        topRow.append(titleStrong, rightBadges);
+        card.appendChild(topRow);
+
+        // If revised version (v2+), show Original v1 vs Current Revision side-by-side comparison
+        const v1 = versionsMap[`${ver.reportId}_v1`];
+        if (ver.versionNumber > 1 && v1) {
+          const compBox = document.createElement("div");
+          compBox.className = "comparison-box";
+
+          const origCol = document.createElement("div");
+          const oTitle = document.createElement("strong");
+          oTitle.style.fontSize = "0.82rem";
+          oTitle.style.color = "var(--muted)";
+          oTitle.textContent = `Original Submission (v1 — ${v1.wordCount || 0} words):`;
+          const oText = document.createElement("p");
+          oText.style.margin = "0.25rem 0 0 0";
+          oText.style.fontSize = "0.9rem";
+          oText.textContent = v1.newsFeedText;
+          origCol.append(oTitle, oText);
+
+          const revCol = document.createElement("div");
+          const rTitle = document.createElement("strong");
+          rTitle.style.fontSize = "0.82rem";
+          rTitle.style.color = "var(--violet)";
+          rTitle.textContent = `Revised Submission (v${ver.versionNumber} — ${ver.wordCount || 0} words):`;
+          const rText = document.createElement("p");
+          rText.style.margin = "0.25rem 0 0 0";
+          rText.style.fontSize = "0.9rem";
+          rText.textContent = ver.newsFeedText;
+          revCol.append(rTitle, rText);
+
+          compBox.append(origCol, revCol);
+          card.appendChild(compBox);
+        } else {
+          const bodyP = document.createElement("p");
+          bodyP.style.background = "var(--bg)";
+          bodyP.style.padding = "0.65rem";
+          bodyP.style.borderRadius = "6px";
+          bodyP.style.margin = "0.55rem 0";
+          bodyP.textContent = ver.newsFeedText;
+          card.appendChild(bodyP);
+        }
+
+        const purpP = document.createElement("p");
+        purpP.style.margin = "0.35rem 0";
+        purpP.style.fontSize = "0.88rem";
+        const pStrong = document.createElement("strong");
+        pStrong.textContent = "Purpose Explanation: ";
+        const pSpan = document.createElement("span");
+        pSpan.textContent = ver.purposeText;
+        purpP.append(pStrong, pSpan);
+        card.appendChild(purpP);
+
+        if (ver.reflectionText) {
+          const refP = document.createElement("p");
+          refP.style.margin = "0.25rem 0";
+          refP.style.fontSize = "0.86rem";
+          refP.style.color = "var(--teal-dark)";
+          refP.textContent = `Student Reflection: ${ver.reflectionText}`;
+          card.appendChild(refP);
+        }
+
+        // Linked AI Feedback for this version
+        const matchingFeedback = allFeedback.filter(f => f && f.versionId === ver.versionId);
+        if (matchingFeedback.length > 0) {
+          const latestFb = matchingFeedback.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))[0];
+          const fbBox = document.createElement("div");
+          fbBox.style.background = "var(--violet-soft)";
+          fbBox.style.border = "1px solid #ddd6fe";
+          fbBox.style.borderRadius = "8px";
+          fbBox.style.padding = "0.65rem";
+          fbBox.style.marginTop = "0.55rem";
+          fbBox.style.fontSize = "0.86rem";
+
+          const fbHead = document.createElement("strong");
+          fbHead.style.color = "var(--violet)";
+          fbHead.textContent = `AI Copyeditor Assessment (v${ver.versionNumber} • ${latestFb.model || "AI"}): `;
+          const fbSum = document.createElement("span");
+          fbSum.textContent = latestFb.overallSummary || "";
+          fbBox.append(fbHead, fbSum);
+
+          if (Array.isArray(latestFb.comments)) {
+            const ul = document.createElement("ul");
+            ul.style.margin = "0.4rem 0 0 0";
+            ul.style.paddingLeft = "1.2rem";
+            latestFb.comments.forEach(c => {
+              const li = document.createElement("li");
+              li.textContent = `[${c.classification}] “${c.extract || ""}” — ${c.explanation} (Suggestion: ${c.suggestion || ""})`;
+              ul.appendChild(li);
+            });
+            fbBox.appendChild(ul);
+          }
+
+          card.appendChild(fbBox);
+        }
+
+        teacherSubmissionsList.appendChild(card);
+      });
+    }
+
+    function updateAdminButtonLabels() {
+      toggleSubmissionsBtn.textContent = `Submissions: ${roomSettings.submissionsOpen ? "Open" : "Closed"}`;
+      toggleAiBtn.textContent = `AI Copyeditor: ${roomSettings.aiEnabled ? "Enabled" : "Disabled"}`;
+      toggleSubmissionsBtn.disabled = !isTeacherAdmin;
+      toggleAiBtn.disabled = !isTeacherAdmin;
+      clearRecordsBtn.disabled = !isTeacherAdmin;
+    }
+
+    function initTeacherFirebase() {
+      if (!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey === "YOUR_FIREBASE_PUBLIC_API_KEY") {
+        document.getElementById("teacherConnText").textContent = "Firebase Not Configured";
+        return;
+      }
+
+      firebase.initializeApp(FIREBASE_CONFIG);
+      auth = firebase.auth();
+      db = firebase.database();
+
+      db.ref(".info/connected").on("value", snap => {
+        document.getElementById("teacherConnText").textContent = snap.val() ? "Connected" : "Reconnecting...";
+      });
+
+      auth.onAuthStateChanged(user => {
+        if (user && !user.isAnonymous) {
+          isTeacherAdmin = true;
+          document.getElementById("teacherLoginForm").style.display = "none";
+          document.getElementById("teacherLoggedInBar").style.display = "flex";
+          document.getElementById("teacherUserLabel").textContent = `Signed in: ${user.email || user.uid}`;
+          adminStatusMsg.textContent = "Teacher administrative privileges active.";
+
+          // Listen to protected usage counter if authorised
+          db.ref("newsroomAdmin/usage/totalCount").on("value", snap => {
+            const total = snap.val() || 0;
+            usageLimitReadout.textContent = `Live Newsroom AI Usage: ${total} requests used | Server Caps: 15 per student / 300 total`;
+          });
+        } else {
+          isTeacherAdmin = false;
+          document.getElementById("teacherLoginForm").style.display = "flex";
+          document.getElementById("teacherLoggedInBar").style.display = "none";
+        }
+        updateAdminButtonLabels();
+      });
+
+      db.ref("newsroom/settings").on("value", snap => {
+        const val = snap.val() || {};
+        roomSettings.submissionsOpen = val.submissionsOpen !== false;
+        roomSettings.aiEnabled = val.aiEnabled !== false;
+        updateAdminButtonLabels();
+      });
+
+      db.ref("newsroom/reports").on("value", snap => {
+        reportsMap = snap.val() || {};
+        renderTeacherSubmissions();
+      });
+
+      db.ref("newsroom/versions").on("value", snap => {
+        versionsMap = snap.val() || {};
+        renderTeacherSubmissions();
+      });
+
+      db.ref("newsroom/aiFeedback").on("value", snap => {
+        aiFeedbackMap = snap.val() || {};
+        renderTeacherSubmissions();
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      initTeacherSelects();
+      renderTeacherReference("hong-kong");
+
+      teacherRefCitySelect.addEventListener("change", () => {
+        renderTeacherReference(teacherRefCitySelect.value);
+      });
+
+      tFilterCity.addEventListener("change", renderTeacherSubmissions);
+      tFilterStudent.addEventListener("input", renderTeacherSubmissions);
+      tFilterVersion.addEventListener("change", renderTeacherSubmissions);
+
+      document.getElementById("teacherLoginBtn").addEventListener("click", async () => {
+        const email = document.getElementById("teacherEmailInput").value.trim();
+        const pass = document.getElementById("teacherPasswordInput").value;
+        if (!email || !pass || !auth) return;
+        try {
+          await auth.signInWithEmailAndPassword(email, pass);
+        } catch (err) {
+          adminStatusMsg.textContent = `Sign-in failed: ${err.message}`;
+        }
+      });
+
+      document.getElementById("teacherLogoutBtn").addEventListener("click", () => {
+        if (auth) auth.signOut();
+      });
+
+      toggleSubmissionsBtn.addEventListener("click", async () => {
+        if (!isTeacherAdmin) return;
+        try {
+          await db.ref("newsroom/settings/submissionsOpen").set(!roomSettings.submissionsOpen);
+        } catch (err) {
+          adminStatusMsg.textContent = `Permission denied: ensure your UID is listed under teacherAdmins in Firebase. (${err.message})`;
+        }
+      });
+
+      toggleAiBtn.addEventListener("click", async () => {
+        if (!isTeacherAdmin) return;
+        try {
+          await db.ref("newsroom/settings/aiEnabled").set(!roomSettings.aiEnabled);
+        } catch (err) {
+          adminStatusMsg.textContent = `Permission denied: ${err.message}`;
+        }
+      });
+
+      clearRecordsBtn.addEventListener("click", async () => {
+        if (!isTeacherAdmin) return;
+        const confirmed = window.confirm(
+          "Are you sure you want to permanently delete all submitted classroom reports, versions and AI feedback records?"
+        );
+        if (!confirmed) return;
+        try {
+          await db.ref("newsroom/reports").remove();
+          await db.ref("newsroom/versions").remove();
+          await db.ref("newsroom/aiFeedback").remove();
+          adminStatusMsg.textContent = "All classroom records cleared.";
+        } catch (err) {
+          adminStatusMsg.textContent = `Failed to clear records: ${err.message}`;
+        }
+      });
+
+      initTeacherFirebase();
+    });
+  </script>
+</body>
+</html>
