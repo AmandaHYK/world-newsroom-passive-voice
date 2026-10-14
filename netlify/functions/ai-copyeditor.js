@@ -3,6 +3,7 @@
  *
  * Minimal Server-Side Adapter for Genuine AI Copyediting via OpenRouter.
  * - Uses OpenRouter model `google/gemini-2.5-flash` by default (configurable via OPENROUTER_MODEL).
+ * - Automatically retries across OpenRouter sub-providers (e.g., Google Vertex) if a 403 occurs.
  * - Keeps OPENROUTER_API_KEY strictly in server environment variables.
  * - Verifies Firebase ID token and verifies ownership of the saved version.
  * - Retrieves the exact saved version from Firebase Realtime Database.
@@ -213,15 +214,30 @@ const VALID_CLASSIFICATIONS = [
   "communicative-purpose concern"
 ];
 
+async function callOpenRouter(endpoint, apiKey, payload) {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`,
+      "HTTP-Referer": process.env.URL || "https://world-newsroom.netlify.app",
+      "X-Title": "World Newsroom Passive Voice Desk"
+    },
+    body: JSON.stringify(payload)
+  });
+  const data = await res.json().catch(() => ({}));
+  return { ok: res.ok, status: res.status, data };
+}
+
 exports.handler = async function (event) {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
   // Check if OpenRouter AI & Firebase Admin are configured
-  const openRouterKey = process.env.OPENROUTER_API_KEY;
-  const openRouterModel = process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash";
-  const openRouterEndpoint = process.env.OPENROUTER_API_ENDPOINT || "https://openrouter.ai/api/v1/chat/completions";
+  const openRouterKey = (process.env.OPENROUTER_API_KEY || "").trim();
+  const openRouterModel = (process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash").trim();
+  const openRouterEndpoint = (process.env.OPENROUTER_API_ENDPOINT || "https://openrouter.ai/api/v1/chat/completions").trim();
 
   if (!openRouterKey || !admin.apps.length) {
     return {
@@ -373,40 +389,59 @@ UNTRUSTED_STUDENT_PURPOSE_EXPLANATION:
 ${purposeText}
 """`;
 
-    // 9. Call OpenRouter API with google/gemini-2.5-flash (or configured override)
-    const aiResponse = await fetch(openRouterEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${openRouterKey}`,
-        "HTTP-Referer": process.env.URL || "http://localhost:8888",
-        "X-Title": "World Newsroom Passive Voice Desk"
+    const messages = [
+      { role: "system", content: systemPrompt },
+      { role: "user", content: userContent }
+    ];
+
+    // 9. Call OpenRouter API (with automatic retry via Google Vertex / fallback if 403 occurs)
+    let aiResult = await callOpenRouter(openRouterEndpoint, openRouterKey, {
+      model: openRouterModel,
+      temperature: 0.2,
+      provider: {
+        order: ["Google Vertex", "Google AI Studio"],
+        allow_fallbacks: true
       },
-      body: JSON.stringify({
-        model: openRouterModel,
-        temperature: 0.2,
-        response_format: { type: "json_object" },
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: userContent }
-        ]
-      })
+      response_format: { type: "json_object" },
+      messages
     });
 
-    if (!aiResponse.ok) {
+    // If 403 Forbidden occurs on Google AI Studio/Vertex, retry without response_format constraint across fallback models
+    if (!aiResult.ok && aiResult.status === 403) {
+      aiResult = await callOpenRouter(openRouterEndpoint, openRouterKey, {
+        models: [openRouterModel, "openai/gpt-4o-mini", "google/gemini-2.0-flash-001"],
+        temperature: 0.2,
+        messages
+      });
+    }
+
+    if (!aiResult.ok) {
+      const providerDetail =
+        aiResult.data?.error?.message ||
+        aiResult.data?.error?.metadata?.raw ||
+        aiResult.data?.message ||
+        JSON.stringify(aiResult.data?.error || {});
       return {
         statusCode: 502,
-        body: JSON.stringify({ error: `AI provider returned status ${aiResponse.status}. Please try again.` })
+        body: JSON.stringify({
+          error: `OpenRouter returned status ${aiResult.status} (${providerDetail}).`
+        })
       };
     }
 
-    const aiJson = await aiResponse.json();
+    const aiJson = aiResult.data;
+    const usedModel = aiJson.model || openRouterModel;
     const rawContent = aiJson.choices?.[0]?.message?.content || "";
 
     let parsedFeedback;
     try {
       const cleaned = rawContent.replace(/^```json\s*/i, "").replace(/```$/i, "").trim();
-      parsedFeedback = JSON.parse(cleaned);
+      const firstBrace = cleaned.indexOf("{");
+      const lastBrace = cleaned.lastIndexOf("}");
+      const jsonSubstring = firstBrace !== -1 && lastBrace !== -1
+        ? cleaned.slice(firstBrace, lastBrace + 1)
+        : cleaned;
+      parsedFeedback = JSON.parse(jsonSubstring);
     } catch (parseErr) {
       return {
         statusCode: 502,
@@ -445,7 +480,7 @@ ${purposeText}
       versionNumber: versionData.versionNumber,
       scenarioId: versionData.scenarioId,
       provider: "openrouter",
-      model: openRouterModel,
+      model: usedModel,
       overallSummary,
       comments: validatedComments,
       createdAt: admin.database.ServerValue.TIMESTAMP
@@ -466,7 +501,7 @@ ${purposeText}
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Server error while processing AI copyeditor check." })
+      body: JSON.stringify({ error: `Server error while processing AI copyeditor check: ${err.message}` })
     };
   }
 };
